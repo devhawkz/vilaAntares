@@ -21,5 +21,14 @@ function villa_antares_setup() {
 		'vila-antares',
 		get_stylesheet_directory() . '/languages'
 	);
+
+	register_nav_menus(
+		array(
+			'villa-antares-overlay' => esc_html__(
+				'Villa Antares Overlay Menu',
+				'vila-antares'
+			),
+		)
+	);
 }
 add_action( 'after_setup_theme', 'villa_antares_setup', 20 );

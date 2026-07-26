@@ -114,3 +114,437 @@ body {
 		transition-duration: 0.01ms;
 	}
 }
+
+/**
+ * Header and fullscreen navigation.
+ *
+ * Blocksy owns the Header Builder row and sticky/transparent state. The child
+ * theme only defines the Villa Antares presentation and shared overlay panel.
+ */
+
+:root {
+	--villa-antares-header-height: 4.75rem;
+	--villa-antares-header-height-sticky: 4.25rem;
+	--villa-antares-header-layer: 10020;
+	--villa-antares-menu-layer: 10010;
+	--villa-antares-menu-duration: 560ms;
+	--villa-antares-menu-easing: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+#header {
+	position: relative;
+	z-index: var(--villa-antares-header-layer);
+}
+
+#header [data-row="middle"] {
+	--height: var(--villa-antares-header-height);
+	min-height: var(--villa-antares-header-height);
+	border: 0;
+	background: var(--wp--preset--color--text);
+	box-shadow: none;
+	transition:
+		min-height 220ms ease,
+		background-color 220ms ease;
+}
+
+#header [data-row="middle"][data-transparent-row="yes"] {
+	background: transparent;
+}
+
+#header [data-sticky*="yes"] [data-row="middle"] {
+	--height: var(--villa-antares-header-height-sticky);
+	min-height: var(--villa-antares-header-height-sticky);
+	background: var(--wp--preset--color--text);
+}
+
+#header [data-row="middle"] > div {
+	min-height: inherit;
+}
+
+#header [data-row="middle"] .ct-container-fluid {
+	width: 100%;
+	padding-inline-start: max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-left)
+	);
+	padding-inline-end: max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-right)
+	);
+}
+
+#header [data-column="middle"] {
+	justify-content: center;
+}
+
+#header [data-column="end"] {
+	justify-content: flex-end;
+}
+
+#header [data-id="logo"] .site-title {
+	margin: 0;
+	color: var(--wp--preset--color--surface);
+	font-family: var(--wp--preset--font-family--primary);
+	font-size: clamp(0.8rem, 3.7vw, 1rem);
+	font-weight: 500;
+	letter-spacing: 0.18em;
+	line-height: 1;
+	text-transform: uppercase;
+	white-space: nowrap;
+	transition: color 220ms ease;
+}
+
+#header [data-id="logo"] .site-title a {
+	color: inherit;
+}
+
+#header .villa-antares-menu-toggle {
+	position: relative;
+	display: inline-flex;
+	min-width: var(--villa-antares-touch-target);
+	min-height: var(--villa-antares-touch-target);
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0 0 0 2rem;
+	border: 0;
+	color: var(--wp--preset--color--surface);
+	background: transparent;
+	box-shadow: none;
+	cursor: pointer;
+}
+
+#header .villa-antares-menu-toggle .ct-icon {
+	display: none;
+}
+
+#header .villa-antares-menu-toggle .ct-label {
+	color: inherit;
+	font-family: var(--wp--preset--font-family--primary);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	line-height: 1;
+	text-transform: uppercase;
+	transition: opacity 180ms ease;
+}
+
+#header .villa-antares-menu-toggle::before,
+#header .villa-antares-menu-toggle::after {
+	position: absolute;
+	inset-inline-start: 0.125rem;
+	width: 1.5rem;
+	height: 1px;
+	background: currentColor;
+	content: "";
+	transform-origin: center;
+	transition: transform 260ms ease;
+}
+
+#header .villa-antares-menu-toggle::before {
+	transform: translateY(-0.25rem);
+}
+
+#header .villa-antares-menu-toggle::after {
+	transform: translateY(0.25rem);
+}
+
+#header .ct-header-socials {
+	justify-content: flex-end;
+	color: var(--wp--preset--color--surface);
+}
+
+#header .ct-header-socials .ct-social-box a {
+	min-width: var(--villa-antares-touch-target);
+	min-height: var(--villa-antares-touch-target);
+	color: inherit;
+}
+
+.villa-antares-menu-open #header [data-row="middle"] {
+	background: transparent;
+}
+
+.villa-antares-menu-open #header [data-id="logo"] .site-title,
+.villa-antares-menu-open #header .villa-antares-menu-toggle,
+.villa-antares-menu-open #header .ct-header-socials {
+	color: var(--wp--preset--color--text);
+}
+
+.villa-antares-menu-open #header .villa-antares-menu-toggle .ct-label {
+	opacity: 0;
+}
+
+.villa-antares-menu-open #header .villa-antares-menu-toggle::before {
+	transform: rotate(45deg);
+}
+
+.villa-antares-menu-open #header .villa-antares-menu-toggle::after {
+	transform: rotate(-45deg);
+}
+
+html.villa-antares-menu-open,
+html.villa-antares-menu-open body {
+	overflow: hidden;
+}
+
+html.villa-antares-menu-open body {
+	position: fixed;
+	inset: calc(-1 * var(--villa-antares-locked-scroll, 0px)) 0 auto;
+	width: 100%;
+}
+
+.villa-antares-menu {
+	position: fixed;
+	z-index: var(--villa-antares-menu-layer);
+	inset: 0;
+	height: 100vh;
+	overflow: hidden;
+	color: var(--wp--preset--color--text);
+	background: var(--wp--preset--color--canvas);
+	transform: translateY(-100%);
+	visibility: hidden;
+	transition:
+		transform var(--villa-antares-menu-duration)
+			var(--villa-antares-menu-easing),
+		visibility 0s linear var(--villa-antares-menu-duration);
+}
+
+@supports (height: 100dvh) {
+	.villa-antares-menu {
+		height: 100dvh;
+	}
+}
+
+.villa-antares-menu-open .villa-antares-menu {
+	transform: translateY(0);
+	visibility: visible;
+	transition:
+		transform var(--villa-antares-menu-duration)
+			var(--villa-antares-menu-easing),
+		visibility 0s;
+}
+
+.villa-antares-menu__scroll {
+	height: 100%;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	-webkit-overflow-scrolling: touch;
+}
+
+.villa-antares-menu__content {
+	display: flex;
+	min-height: 100%;
+	flex-direction: column;
+	padding-top: calc(
+		var(--villa-antares-header-height) +
+		var(--villa-antares-safe-area-top) +
+		var(--wp--preset--spacing--md, 2rem)
+	);
+	padding-bottom: max(
+		var(--wp--preset--spacing--md, 2rem),
+		var(--villa-antares-safe-area-bottom)
+	);
+}
+
+.villa-antares-menu__navigation {
+	display: flex;
+	flex: 1 0 auto;
+	align-items: center;
+}
+
+.villa-antares-menu__list {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.villa-antares-menu__list > li {
+	margin: 0;
+	opacity: 0;
+	transform: translateY(-0.75rem);
+	transition:
+		opacity 260ms ease,
+		transform 320ms ease;
+}
+
+.villa-antares-menu-open .villa-antares-menu__list > li {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: calc(
+		100ms + (var(--villa-antares-menu-index, 0) * 35ms)
+	);
+}
+
+.villa-antares-menu__list > li:nth-child(1) {
+	--villa-antares-menu-index: 1;
+}
+
+.villa-antares-menu__list > li:nth-child(2) {
+	--villa-antares-menu-index: 2;
+}
+
+.villa-antares-menu__list > li:nth-child(3) {
+	--villa-antares-menu-index: 3;
+}
+
+.villa-antares-menu__list > li:nth-child(4) {
+	--villa-antares-menu-index: 4;
+}
+
+.villa-antares-menu__list > li:nth-child(5) {
+	--villa-antares-menu-index: 5;
+}
+
+.villa-antares-menu__list > li:nth-child(6) {
+	--villa-antares-menu-index: 6;
+}
+
+.villa-antares-menu__list a {
+	position: relative;
+	display: inline-block;
+	max-width: 100%;
+	padding-block: clamp(0.28rem, 1vh, 0.65rem);
+	color: var(--wp--preset--color--text);
+	font-family: var(--wp--preset--font-family--primary);
+	font-size: clamp(2rem, 11vw, 4rem);
+	font-weight: 600;
+	letter-spacing: 0.015em;
+	line-height: 0.98;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.villa-antares-menu__list a::after {
+	position: absolute;
+	right: 0;
+	bottom: 0.22rem;
+	left: 0;
+	height: 2px;
+	background: var(--wp--preset--color--accent);
+	content: "";
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 220ms ease;
+}
+
+.villa-antares-menu__list a:hover,
+.villa-antares-menu__list a:focus-visible,
+.villa-antares-menu__list a[aria-current="location"] {
+	color: var(--wp--preset--color--accent);
+}
+
+.villa-antares-menu__list a:hover::after,
+.villa-antares-menu__list a:focus-visible::after,
+.villa-antares-menu__list a[aria-current="location"]::after {
+	transform: scaleX(1);
+}
+
+.villa-antares-menu__socials {
+	flex: 0 0 auto;
+	padding-top: var(--wp--preset--spacing--md, 2rem);
+}
+
+.villa-antares-menu__socials .ct-social-box {
+	gap: 0.75rem;
+}
+
+.villa-antares-menu__socials .ct-social-box a {
+	display: inline-flex;
+	min-width: var(--villa-antares-touch-target);
+	min-height: var(--villa-antares-touch-target);
+	align-items: center;
+	justify-content: center;
+	color: var(--wp--preset--color--text);
+}
+
+@media (min-width: 48rem) {
+	.villa-antares-menu__list a {
+		font-size: clamp(3rem, 7vw, 5.5rem);
+	}
+}
+
+@media (min-width: 62.5rem) {
+	:root {
+		--villa-antares-header-height: 5.75rem;
+		--villa-antares-header-height-sticky: 5rem;
+	}
+
+	#header [data-id="logo"] .site-title {
+		font-size: clamp(1rem, 1.15vw, 1.25rem);
+	}
+
+	#header .villa-antares-menu-toggle {
+		padding-inline-start: 2.25rem;
+	}
+
+	#header .villa-antares-menu-toggle .ct-label {
+		font-size: 0.8rem;
+	}
+
+	#header .villa-antares-menu-toggle::before,
+	#header .villa-antares-menu-toggle::after {
+		width: 1.75rem;
+	}
+
+	.villa-antares-menu__content {
+		padding-top: calc(
+			var(--villa-antares-header-height) +
+			var(--villa-antares-safe-area-top) +
+			var(--wp--preset--spacing--lg, 3.5rem)
+		);
+		padding-bottom: max(
+			var(--wp--preset--spacing--lg, 3.5rem),
+			var(--villa-antares-safe-area-bottom)
+		);
+	}
+
+	.villa-antares-menu__navigation {
+		align-items: flex-start;
+	}
+
+	.villa-antares-menu__list {
+		max-width: min(70rem, 74vw);
+	}
+
+	.villa-antares-menu__list a {
+		padding-block: clamp(0.22rem, 0.7vh, 0.5rem);
+		font-size: clamp(3.25rem, 5.1vw, 6.25rem);
+	}
+
+	.villa-antares-menu__socials {
+		display: none;
+	}
+}
+
+@media (max-height: 34rem) {
+	.villa-antares-menu__content {
+		padding-top: calc(
+			var(--villa-antares-header-height) +
+			var(--villa-antares-safe-area-top) +
+			1rem
+		);
+	}
+
+	.villa-antares-menu__navigation {
+		align-items: flex-start;
+	}
+
+	.villa-antares-menu__list a {
+		padding-block: 0.2rem;
+		font-size: clamp(1.7rem, 9vh, 3.25rem);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.villa-antares-menu,
+	.villa-antares-menu__list > li,
+	.villa-antares-menu__list a::after,
+	#header [data-row="middle"],
+	#header [data-id="logo"] .site-title,
+	#header .villa-antares-menu-toggle::before,
+	#header .villa-antares-menu-toggle::after,
+	#header .villa-antares-menu-toggle .ct-label {
+		transition-duration: 0.01ms;
+		transition-delay: 0s;
+	}
+}
