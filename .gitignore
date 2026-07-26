@@ -1,6 +1,7 @@
 # Local Codex instructions and project context
 /AGENTS.override.md
 /.codex-context/
+/.codex-content/
 
 # Local Codex logs
 /.codex-log/
@@ -24,5 +25,3 @@ Thumbs.db
 .env
 .env.*
 !.env.example
-.codex-content/Tekst za sajt.docx
-.codex-content/Villa-Antares-ChatGPT-Project-Brief.md
