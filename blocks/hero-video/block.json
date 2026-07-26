@@ -1,0 +1,57 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "villa-antares/hero-video",
+	"version": "1.0.0",
+	"title": "Fullscreen Hero Video",
+	"category": "media",
+	"icon": "format-video",
+	"description": "Responsive fullscreen video with separate portrait media, accessible text and custom controls.",
+	"textdomain": "vila-antares",
+	"attributes": {
+		"desktopVideoId": {
+			"type": "integer",
+			"default": 0
+		},
+		"mobileVideoId": {
+			"type": "integer",
+			"default": 0
+		},
+		"desktopPosterId": {
+			"type": "integer",
+			"default": 0
+		},
+		"mobilePosterId": {
+			"type": "integer",
+			"default": 0
+		},
+		"accessibleTitle": {
+			"type": "string",
+			"default": "Villa Antares"
+		},
+		"accessibleLocation": {
+			"type": "string",
+			"default": "Montenegro"
+		},
+		"accessibleTagline": {
+			"type": "string",
+			"default": "The luxury of space. The privilege of privacy. The beauty of the Adriatic."
+		},
+		"videoId": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"align": [
+			"full"
+		],
+		"anchor": true,
+		"html": false,
+		"multiple": false
+	},
+	"editorScript": "villa-antares-hero-video-editor",
+	"editorStyle": "villa-antares-site",
+	"viewScript": "villa-antares-hero-video",
+	"render": "file:./render.php"
+}

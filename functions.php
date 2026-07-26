@@ -12,3 +12,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once get_stylesheet_directory() . '/inc/setup.php';
 require_once get_stylesheet_directory() . '/inc/assets.php';
 require_once get_stylesheet_directory() . '/inc/header.php';
+require_once get_stylesheet_directory() . '/inc/hero-video.php';

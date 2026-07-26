@@ -118,17 +118,18 @@ body {
 /**
  * Header and fullscreen navigation.
  *
- * Blocksy owns the Header Builder row and sticky/transparent state. The child
- * theme only defines the Villa Antares presentation and shared overlay panel.
+ * Blocksy owns the Header Builder row. The child theme keeps the public Header
+ * static, limits transparency to desktop and defines the shared overlay panel.
  */
 
 :root {
 	--villa-antares-header-height: 4.75rem;
-	--villa-antares-header-height-sticky: 4.25rem;
 	--villa-antares-header-layer: 10020;
 	--villa-antares-menu-layer: 10010;
 	--villa-antares-menu-duration: 560ms;
 	--villa-antares-menu-easing: cubic-bezier(0.76, 0, 0.24, 1);
+	--villa-antares-overlay-menu-font-size:
+		var(--wp--preset--font-size--heading-small);
 }
 
 #header {
@@ -149,12 +150,6 @@ body {
 
 #header [data-row="middle"][data-transparent-row="yes"] {
 	background: transparent;
-}
-
-#header [data-sticky*="yes"] [data-row="middle"] {
-	--height: var(--villa-antares-header-height-sticky);
-	min-height: var(--villa-antares-header-height-sticky);
-	background: var(--wp--preset--color--text);
 }
 
 #header [data-row="middle"] > div {
@@ -199,13 +194,16 @@ body {
 }
 
 #header .villa-antares-menu-toggle {
+	--villa-antares-menu-toggle-width: 4rem;
+	--villa-antares-menu-toggle-line-width: 2.1rem;
 	position: relative;
-	display: inline-flex;
-	min-width: var(--villa-antares-touch-target);
-	min-height: var(--villa-antares-touch-target);
-	align-items: center;
-	justify-content: flex-start;
-	padding: 0 0 0 2rem;
+	display: inline-grid;
+	inline-size: var(--villa-antares-menu-toggle-width);
+	min-inline-size: var(--villa-antares-touch-target);
+	block-size: var(--villa-antares-touch-target);
+	min-block-size: var(--villa-antares-touch-target);
+	padding: 0;
+	place-items: center;
 	border: 0;
 	color: var(--wp--preset--color--surface);
 	background: transparent;
@@ -220,9 +218,9 @@ body {
 #header .villa-antares-menu-toggle .ct-label {
 	color: inherit;
 	font-family: var(--wp--preset--font-family--primary);
-	font-size: 0.75rem;
-	font-weight: 600;
-	letter-spacing: 0.16em;
+	font-size: 0.95rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
 	line-height: 1;
 	text-transform: uppercase;
 	transition: opacity 180ms ease;
@@ -231,21 +229,36 @@ body {
 #header .villa-antares-menu-toggle::before,
 #header .villa-antares-menu-toggle::after {
 	position: absolute;
-	inset-inline-start: 0.125rem;
-	width: 1.5rem;
-	height: 1px;
+	inset-inline-start: 0;
+	inline-size: var(--villa-antares-menu-toggle-line-width);
+	block-size: 2px;
 	background: currentColor;
 	content: "";
 	transform-origin: center;
-	transition: transform 260ms ease;
+	transition:
+		inset-inline-start 360ms var(--villa-antares-menu-easing),
+		inline-size 360ms var(--villa-antares-menu-easing),
+		inset-block-start 260ms ease,
+		transform 260ms ease;
 }
 
 #header .villa-antares-menu-toggle::before {
-	transform: translateY(-0.25rem);
+	inset-block-start: 0;
+	inset-inline-start: calc(
+		100% - var(--villa-antares-menu-toggle-line-width)
+	);
 }
 
 #header .villa-antares-menu-toggle::after {
-	transform: translateY(0.25rem);
+	inset-block-start: calc(100% - 2px);
+}
+
+#header
+	.villa-antares-menu-toggle:is(:hover, :focus-visible)::before,
+#header
+	.villa-antares-menu-toggle:is(:hover, :focus-visible)::after {
+	inset-inline-start: 0;
+	inline-size: 100%;
 }
 
 #header .ct-header-socials {
@@ -263,6 +276,12 @@ body {
 	background: transparent;
 }
 
+.villa-antares-menu-open #header {
+	position: fixed;
+	inset: 0 0 auto;
+	inline-size: 100%;
+}
+
 .villa-antares-menu-open #header [data-id="logo"] .site-title,
 .villa-antares-menu-open #header .villa-antares-menu-toggle,
 .villa-antares-menu-open #header .ct-header-socials {
@@ -274,11 +293,17 @@ body {
 }
 
 .villa-antares-menu-open #header .villa-antares-menu-toggle::before {
-	transform: rotate(45deg);
+	inset-block-start: 50%;
+	inset-inline-start: 50%;
+	inline-size: 2rem;
+	transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .villa-antares-menu-open #header .villa-antares-menu-toggle::after {
-	transform: rotate(-45deg);
+	inset-block-start: 50%;
+	inset-inline-start: 50%;
+	inline-size: 2rem;
+	transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 html.villa-antares-menu-open,
@@ -348,7 +373,7 @@ html.villa-antares-menu-open body {
 .villa-antares-menu__navigation {
 	display: flex;
 	flex: 1 0 auto;
-	align-items: center;
+	align-items: flex-start;
 }
 
 .villa-antares-menu__list {
@@ -406,7 +431,7 @@ html.villa-antares-menu-open body {
 	padding-block: clamp(0.28rem, 1vh, 0.65rem);
 	color: var(--wp--preset--color--text);
 	font-family: var(--wp--preset--font-family--primary);
-	font-size: clamp(2rem, 11vw, 4rem);
+	font-size: var(--villa-antares-overlay-menu-font-size);
 	font-weight: 600;
 	letter-spacing: 0.015em;
 	line-height: 0.98;
@@ -457,16 +482,9 @@ html.villa-antares-menu-open body {
 	color: var(--wp--preset--color--text);
 }
 
-@media (min-width: 48rem) {
-	.villa-antares-menu__list a {
-		font-size: clamp(3rem, 7vw, 5.5rem);
-	}
-}
-
 @media (min-width: 62.5rem) {
 	:root {
 		--villa-antares-header-height: 5.75rem;
-		--villa-antares-header-height-sticky: 5rem;
 	}
 
 	#header [data-id="logo"] .site-title {
@@ -474,16 +492,12 @@ html.villa-antares-menu-open body {
 	}
 
 	#header .villa-antares-menu-toggle {
-		padding-inline-start: 2.25rem;
+		--villa-antares-menu-toggle-width: 4.25rem;
+		--villa-antares-menu-toggle-line-width: 2.25rem;
 	}
 
 	#header .villa-antares-menu-toggle .ct-label {
-		font-size: 0.8rem;
-	}
-
-	#header .villa-antares-menu-toggle::before,
-	#header .villa-antares-menu-toggle::after {
-		width: 1.75rem;
+		font-size: 1.05rem;
 	}
 
 	.villa-antares-menu__content {
@@ -508,7 +522,6 @@ html.villa-antares-menu-open body {
 
 	.villa-antares-menu__list a {
 		padding-block: clamp(0.22rem, 0.7vh, 0.5rem);
-		font-size: clamp(3.25rem, 5.1vw, 6.25rem);
 	}
 
 	.villa-antares-menu__socials {
@@ -531,7 +544,37 @@ html.villa-antares-menu-open body {
 
 	.villa-antares-menu__list a {
 		padding-block: 0.2rem;
-		font-size: clamp(1.7rem, 9vh, 3.25rem);
+	}
+}
+
+@media (max-width: 999.98px) and (orientation: landscape) and (max-height: 34rem) {
+	#header [data-device="mobile"] [data-row="middle"] .ct-container-fluid {
+		position: relative;
+	}
+
+	#header [data-device="mobile"] [data-column="middle"] {
+		position: absolute;
+		inset-inline-end: max(
+			var(--villa-antares-gutter),
+			var(--villa-antares-safe-area-right)
+		);
+		inline-size: auto;
+	}
+}
+
+@media (max-width: 999.98px) {
+	#header [data-device="mobile"] [data-row="middle"],
+	#header
+		[data-device="mobile"]
+		[data-row="middle"][data-transparent-row="yes"] {
+		background: var(--wp--preset--color--text);
+	}
+
+	.villa-antares-menu-open
+		#header
+		[data-device="mobile"]
+		[data-row="middle"] {
+		background: transparent;
 	}
 }
 
@@ -546,5 +589,480 @@ html.villa-antares-menu-open body {
 	#header .villa-antares-menu-toggle .ct-label {
 		transition-duration: 0.01ms;
 		transition-delay: 0s;
+	}
+}
+
+/**
+ * Fullscreen Hero Video.
+ */
+
+.villa-antares-hero {
+	position: relative;
+	isolation: isolate;
+	inline-size: 100%;
+	max-inline-size: none;
+	block-size: 100vh;
+	block-size: 100svh;
+	margin: 0;
+	overflow: hidden;
+	color: #fff;
+	background: #171714;
+}
+
+.villa-antares-hero::before,
+.villa-antares-hero::after {
+	position: absolute;
+	z-index: 2;
+	right: 0;
+	left: 0;
+	pointer-events: none;
+	content: "";
+}
+
+.villa-antares-hero::before {
+	top: 0;
+	block-size: min(32%, 15rem);
+	background: linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 0.34),
+		rgba(0, 0, 0, 0)
+	);
+}
+
+.villa-antares-hero::after {
+	bottom: 0;
+	block-size: min(28%, 13rem);
+	background: linear-gradient(
+		to top,
+		rgba(0, 0, 0, 0.3),
+		rgba(0, 0, 0, 0)
+	);
+}
+
+.villa-antares-hero__poster,
+.villa-antares-hero__poster img,
+.villa-antares-hero__video {
+	position: absolute;
+	inset: 0;
+	inline-size: 100%;
+	block-size: 100%;
+	max-inline-size: none;
+	object-fit: cover;
+}
+
+.villa-antares-hero__poster {
+	z-index: 0;
+	margin: 0;
+	opacity: 1;
+	transition: opacity 220ms ease;
+}
+
+.villa-antares-hero__poster img {
+	display: block;
+}
+
+.villa-antares-hero__video {
+	z-index: 1;
+	opacity: 0;
+	cursor: pointer;
+	transition: opacity 220ms ease;
+}
+
+.villa-antares-hero.is-video-playing .villa-antares-hero__poster {
+	opacity: 0;
+}
+
+.villa-antares-hero.is-video-playing .villa-antares-hero__video {
+	opacity: 1;
+}
+
+/*
+ * The supplied landscape master includes a very narrow dark edge along its
+ * bottom frame. A restrained centered crop removes it without changing the
+ * portrait media or distorting either source.
+ */
+@media (min-width: 690px), (orientation: landscape) {
+	.villa-antares-hero__poster img,
+	.villa-antares-hero__video {
+		transform: scale(1.03);
+	}
+}
+
+.villa-antares-hero__copy {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+.villa-antares-hero__controls {
+	position: absolute;
+	z-index: 4;
+	right: 50%;
+	bottom: calc(2rem + var(--villa-antares-safe-area-bottom));
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.9rem;
+	transform: translateX(50%);
+}
+
+.villa-antares-hero__controls[hidden],
+.villa-antares-hero__fallback[hidden] {
+	display: none;
+}
+
+.villa-antares-hero__media-controls {
+	position: relative;
+	display: grid;
+	inline-size: clamp(3.75rem, 4.4vw, 4.25rem);
+	block-size: clamp(3.75rem, 4.4vw, 4.25rem);
+	place-items: center;
+}
+
+.villa-antares-hero__control {
+	position: relative;
+	display: inline-grid;
+	grid-area: 1 / 1;
+	inline-size: 100%;
+	block-size: 100%;
+	padding: 0;
+	place-items: center;
+	border: 0;
+	border-radius: 50%;
+	color: #fff;
+	background: #cdbb3e;
+	box-shadow: 0 0.2rem 1.25rem rgba(0, 0, 0, 0.18);
+	cursor: pointer;
+	transition:
+		background-color 180ms ease,
+		opacity 180ms ease,
+		transform 180ms ease;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.villa-antares-hero__control:hover {
+	background: #dac94e;
+	transform: scale(1.04);
+}
+
+.villa-antares-hero__control:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: 3px;
+}
+
+.villa-antares-hero__control:disabled {
+	cursor: not-allowed;
+	opacity: 0.55;
+}
+
+.villa-antares-hero__icon {
+	position: absolute;
+	inline-size: 2.4rem;
+	block-size: 2.4rem;
+	fill: currentColor;
+}
+
+.villa-antares-hero__control[data-state="paused"] [data-icon="pause"],
+.villa-antares-hero__control[data-state="playing"] [data-icon="play"],
+.villa-antares-hero__control[data-state="muted"] [data-icon="sound"],
+.villa-antares-hero__control[data-state="sound"] [data-icon="muted"] {
+	visibility: hidden;
+}
+
+.villa-antares-hero__control--sound {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.villa-antares-hero.is-video-playing
+	.villa-antares-hero__control--sound {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.villa-antares-hero.is-video-playing
+	.villa-antares-hero__control--play:not(:focus-visible) {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.villa-antares-hero.is-video-playing
+	.villa-antares-hero__control--play:focus-visible {
+	z-index: 1;
+}
+
+.villa-antares-hero__next {
+	display: inline-grid;
+	min-inline-size: var(--villa-antares-touch-target);
+	min-block-size: var(--villa-antares-touch-target);
+	place-items: center;
+	color: #fff;
+	text-decoration: none;
+	filter: drop-shadow(0 0.12rem 0.4rem rgba(0, 0, 0, 0.35));
+	transition:
+		color 180ms ease,
+		transform 180ms ease;
+}
+
+.villa-antares-hero__next:hover {
+	color: #cdbb3e;
+	transform: translateY(0.2rem);
+}
+
+.villa-antares-hero__next:focus-visible {
+	outline-color: #fff;
+}
+
+.villa-antares-hero__next svg {
+	inline-size: clamp(2.7rem, 3.3vw, 3.5rem);
+	block-size: auto;
+	animation: villa-antares-hero-next-float 1s ease-in-out infinite;
+}
+
+@keyframes villa-antares-hero-next-float {
+	0%,
+	100% {
+		transform: translateY(-0.18rem);
+	}
+
+	50% {
+		transform: translateY(0.32rem);
+	}
+}
+
+.villa-antares-hero__fallback {
+	position: absolute;
+	z-index: 5;
+	right: max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-right)
+	);
+	bottom: calc(
+		max(
+			var(--villa-antares-gutter),
+			var(--villa-antares-safe-area-bottom)
+		) +
+		var(--villa-antares-touch-target) +
+		0.75rem
+	);
+	left: max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-left)
+	);
+	max-inline-size: 34rem;
+	margin: 0;
+	color: #fff;
+	font-size: 0.875rem;
+	line-height: 1.45;
+	text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+}
+
+.villa-antares-hero__fallback a {
+	color: inherit;
+	text-decoration: underline;
+	text-underline-offset: 0.18em;
+}
+
+.villa-antares-hero__fallback--noscript {
+	display: block;
+}
+
+@media (max-width: 689.98px) and (orientation: portrait) {
+	.villa-antares-hero__copy {
+		z-index: 3;
+		top: 47%;
+		right: max(
+			var(--villa-antares-gutter),
+			var(--villa-antares-safe-area-right)
+		);
+		left: max(
+			var(--villa-antares-gutter),
+			var(--villa-antares-safe-area-left)
+		);
+		width: auto;
+		height: auto;
+		padding: 0;
+		margin: 0;
+		overflow: visible;
+		color: #fff;
+		font-family: Arial, Helvetica, sans-serif;
+		text-align: center;
+		text-shadow:
+			0 1px 16px rgba(0, 0, 0, 0.7),
+			0 0 2px rgba(0, 0, 0, 0.48);
+		white-space: normal;
+		clip: auto;
+		clip-path: none;
+		border: 0;
+		transform: translateY(-50%);
+	}
+
+	.villa-antares-hero__title {
+		margin: 0;
+		color: inherit;
+		font-family: inherit;
+		font-size: clamp(1.75rem, 9vw, 3rem);
+		font-weight: 400;
+		letter-spacing: 0.075em;
+		line-height: 1.05;
+		text-transform: uppercase;
+	}
+
+	.villa-antares-hero__location {
+		margin: 0.75rem 0 0;
+		font-size: clamp(0.72rem, 3.4vw, 0.95rem);
+		font-weight: 400;
+		letter-spacing: 0.12em;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	.villa-antares-hero__tagline {
+		max-inline-size: 31rem;
+		margin: 1.25rem auto 0;
+		font-size: clamp(0.86rem, 3.7vw, 1.08rem);
+		font-weight: 400;
+		line-height: 1.45;
+	}
+}
+
+@media (max-width: 999.98px) {
+	.villa-antares-hero {
+		block-size: calc(
+			100vh - var(--villa-antares-header-height)
+		);
+		block-size: calc(
+			100svh - var(--villa-antares-header-height)
+		);
+	}
+}
+
+@media (max-height: 34rem) {
+	.villa-antares-hero__controls {
+		bottom: max(0.65rem, var(--villa-antares-safe-area-bottom));
+		gap: 0.35rem;
+	}
+
+	.villa-antares-hero__media-controls {
+		inline-size: 3.25rem;
+		block-size: 3.25rem;
+	}
+}
+
+@media (max-width: 689.98px) and (orientation: portrait) and (max-height: 36rem) {
+	.villa-antares-hero__copy {
+		top: 45%;
+	}
+
+	.villa-antares-hero__location {
+		margin-top: 0.5rem;
+	}
+
+	.villa-antares-hero__tagline {
+		margin-top: 0.75rem;
+		line-height: 1.35;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.villa-antares-hero__poster,
+	.villa-antares-hero__video {
+		transition: none;
+	}
+
+	.villa-antares-hero__next svg {
+		animation: none;
+	}
+}
+
+/**
+ * Hero block editor.
+ */
+
+.villa-antares-hero-editor {
+	padding: clamp(1rem, 2vw, 2rem);
+	color: #27251f;
+	background: #f6f2e9;
+}
+
+.villa-antares-hero-editor__intro {
+	margin-block-end: 1.25rem;
+}
+
+.villa-antares-hero-editor__intro h2,
+.villa-antares-hero-editor__copy-preview h1 {
+	margin: 0;
+	color: inherit;
+}
+
+.villa-antares-hero-editor__intro p {
+	margin: 0.5rem 0 0;
+}
+
+.villa-antares-hero-editor__grid {
+	display: grid;
+	gap: 1rem;
+	margin-block-start: 1rem;
+}
+
+.villa-antares-hero-editor__media {
+	min-width: 0;
+	padding: 1rem;
+	border: 1px solid #ded8ca;
+	background: #fffdf8;
+}
+
+.villa-antares-hero-editor__media-heading,
+.villa-antares-hero-editor__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+}
+
+.villa-antares-hero-editor__status {
+	color: #68645a;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+}
+
+.villa-antares-hero-editor__poster {
+	width: 100%;
+	max-height: 15rem;
+	margin-block-start: 0.75rem;
+	object-fit: contain;
+	background: #27251f;
+}
+
+.villa-antares-hero-editor__details {
+	margin: 0.75rem 0;
+	color: #68645a;
+	font-size: 0.875rem;
+	overflow-wrap: anywhere;
+}
+
+.villa-antares-hero-editor__copy-preview {
+	padding: clamp(1.5rem, 4vw, 3rem) 1rem;
+	margin-block-start: 1rem;
+	color: #fff;
+	text-align: center;
+	background: #27251f;
+}
+
+.villa-antares-hero-editor__copy-preview p {
+	margin: 0.65rem auto 0;
+}
+
+@media (min-width: 48rem) {
+	.villa-antares-hero-editor__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }

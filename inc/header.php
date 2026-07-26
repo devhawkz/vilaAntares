@@ -10,6 +10,59 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Keeps the project Header static and limits transparency to desktop.
+ *
+ * The saved Blocksy Header Builder structure remains untouched so that its
+ * placements continue to be editable in the Customizer. Only the presentation
+ * modes required by the Villa Antares design are adjusted at render time.
+ *
+ * @param mixed $placements Saved Blocksy Header Builder placements.
+ * @return mixed
+ */
+function villa_antares_filter_header_behaviour( $placements ) {
+	if (
+		! is_array( $placements )
+		|| empty( $placements['sections'] )
+		|| ! is_array( $placements['sections'] )
+	) {
+		return $placements;
+	}
+
+	foreach ( $placements['sections'] as &$section ) {
+		if ( ! is_array( $section ) ) {
+			continue;
+		}
+
+		if (
+			empty( $section['settings'] )
+			|| ! is_array( $section['settings'] )
+		) {
+			$section['settings'] = array();
+		}
+
+		$section['settings']['has_sticky_header'] = 'no';
+		$section['settings']['sticky_behaviour']  = array(
+			'desktop' => false,
+			'tablet'  => false,
+			'mobile'  => false,
+		);
+		$section['settings']['transparent_behaviour'] = array(
+			'desktop' => true,
+			'tablet'  => false,
+			'mobile'  => false,
+		);
+	}
+	unset( $section );
+
+	return $placements;
+}
+add_filter(
+	'theme_mod_header_placements',
+	'villa_antares_filter_header_behaviour',
+	20
+);
+
+/**
  * Returns the social networks configured in the active Blocksy header section.
  *
  * @return array<int, array<string, mixed>>
