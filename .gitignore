@@ -1,0 +1,28 @@
+# Local Codex instructions and project context
+/AGENTS.override.md
+/.codex-context/
+
+# Local Codex logs
+/.codex-log/
+
+# Local development and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Dependencies — not currently used
+/node_modules/
+/vendor/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+.codex-content/Tekst za sajt.docx
+.codex-content/Villa-Antares-ChatGPT-Project-Brief.md
