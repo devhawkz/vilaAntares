@@ -252,7 +252,7 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_extra );
 
 			<a
 				class="villa-antares-hero__next"
-				href="#footer"
+				href="#introduction"
 				data-villa-antares-next
 				aria-label="<?php echo esc_attr__( 'Go to the next section', 'vila-antares' ); ?>"
 			>

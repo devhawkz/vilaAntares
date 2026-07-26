@@ -1,0 +1,64 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "villa-antares/introduction",
+	"version": "1.0.0",
+	"title": "Introduction",
+	"category": "design",
+	"icon": "align-pull-left",
+	"description": "Editorial introduction with editable copy, CTA and responsive image.",
+	"textdomain": "vila-antares",
+	"attributes": {
+		"sectionNumber": {
+			"type": "string",
+			"default": "01"
+		},
+		"eyebrow": {
+			"type": "string",
+			"default": "Explore"
+		},
+		"decorativeLabel": {
+			"type": "string",
+			"default": "Villa Antares"
+		},
+		"title": {
+			"type": "string",
+			"default": "VILLA ANTARES"
+		},
+		"ctaText": {
+			"type": "string",
+			"default": "CONTACT US"
+		},
+		"ctaUrl": {
+			"type": "string",
+			"default": "#contact"
+		},
+		"imageId": {
+			"type": "integer",
+			"default": 0
+		},
+		"altText": {
+			"type": "string",
+			"default": "Villa Antares overlooking the Adriatic Sea"
+		},
+		"focalPoint": {
+			"type": "object",
+			"default": {
+				"x": 0.5,
+				"y": 0.5
+			}
+		}
+	},
+	"supports": {
+		"align": [
+			"full"
+		],
+		"anchor": false,
+		"customClassName": false,
+		"html": false,
+		"multiple": false
+	},
+	"editorScript": "villa-antares-introduction-editor",
+	"editorStyle": "villa-antares-site",
+	"render": "file:./render.php"
+}

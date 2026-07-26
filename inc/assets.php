@@ -89,6 +89,29 @@ function villa_antares_register_assets() {
 			true
 		);
 	}
+
+	$introduction_editor_script_path = get_stylesheet_directory()
+		. '/blocks/introduction/index.js';
+
+	if ( file_exists( $introduction_editor_script_path ) ) {
+		wp_register_script(
+			'villa-antares-introduction-editor',
+			get_stylesheet_directory_uri() . '/blocks/introduction/index.js',
+			array(
+				'wp-block-editor',
+				'wp-blocks',
+				'wp-components',
+				'wp-core-data',
+				'wp-data',
+				'wp-element',
+				'wp-i18n',
+			),
+			villa_antares_get_asset_version(
+				'blocks/introduction/index.js'
+			),
+			true
+		);
+	}
 }
 add_action( 'init', 'villa_antares_register_assets', 5 );
 

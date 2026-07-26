@@ -1066,3 +1066,416 @@ html.villa-antares-menu-open body {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
+
+/**
+ * Introduction.
+ */
+
+.villa-antares-introduction {
+	position: relative;
+	inline-size: 100%;
+	max-inline-size: none;
+	padding-block: var(--wp--preset--spacing--lg, 3rem);
+	padding-inline-start: max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-left)
+	);
+	padding-inline-end: max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-right)
+	);
+	margin: 0;
+	scroll-margin-top: 1rem;
+	background: var(--wp--preset--color--canvas);
+}
+
+.villa-antares-introduction__layout {
+	display: grid;
+	inline-size: 100%;
+	max-inline-size: 94rem;
+	margin-inline: auto;
+}
+
+.villa-antares-introduction__text-card {
+	position: relative;
+	z-index: 2;
+	min-inline-size: 0;
+	padding:
+		clamp(6rem, 28vw, 7.5rem)
+		clamp(1.25rem, 6vw, 2rem)
+		clamp(3rem, 14vw, 5rem);
+	color: var(--wp--preset--color--text);
+	background: var(--wp--preset--color--surface);
+}
+
+.villa-antares-introduction__decorative {
+	position: absolute;
+	inset-block-start: clamp(2.5rem, 12vw, 4rem);
+	inset-inline-start: clamp(1.25rem, 6vw, 2rem);
+	max-inline-size: calc(100% - clamp(2.5rem, 12vw, 4rem));
+	color: rgba(39, 37, 31, 0.07);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(2.25rem, 11vw, 5rem);
+	font-style: italic;
+	font-weight: 400;
+	letter-spacing: -0.045em;
+	line-height: 1;
+	white-space: nowrap;
+}
+
+.villa-antares-introduction__marker {
+	display: flex;
+	align-items: center;
+	gap: clamp(0.65rem, 3vw, 1rem);
+	color: var(--wp--preset--color--accent);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(0.9rem, 3.8vw, 1.05rem);
+	font-weight: 400;
+	line-height: 1.2;
+}
+
+.villa-antares-introduction__marker-line {
+	inline-size: clamp(2.75rem, 14vw, 4rem);
+	block-size: 1px;
+	background: var(--wp--preset--color--muted);
+}
+
+.villa-antares-introduction__title {
+	max-inline-size: 10ch;
+	margin: clamp(2rem, 9vw, 3rem) 0 0;
+	color: var(--wp--preset--color--text);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(2.25rem, 11vw, 4rem);
+	font-weight: 400;
+	letter-spacing: 0.085em;
+	line-height: 1.02;
+	overflow-wrap: normal;
+	text-transform: uppercase;
+	word-break: normal;
+}
+
+.villa-antares-introduction__body {
+	max-inline-size: 64ch;
+	margin-block-start: clamp(2rem, 9vw, 3rem);
+	color: var(--wp--preset--color--muted);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(1rem, 0.975rem + 0.15vw, 1.075rem);
+	line-height: 1.65;
+}
+
+.villa-antares-introduction__body > p {
+	margin: 0;
+}
+
+.villa-antares-introduction__body > p + p {
+	margin-block-start: 0.9rem;
+}
+
+.villa-antares-introduction__body > p:last-child {
+	margin-block-start: 1.4rem;
+	color: var(--wp--preset--color--text);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+}
+
+.villa-antares-introduction__cta {
+	display: inline-flex;
+	inline-size: 100%;
+	max-inline-size: 31rem;
+	min-block-size: var(--villa-antares-touch-target);
+	align-items: center;
+	justify-content: center;
+	padding: 0.75rem 1.5rem;
+	margin-block-start: clamp(2rem, 9vw, 3rem);
+	border: 2px solid currentColor;
+	border-radius: 999px;
+	color: var(--wp--preset--color--text);
+	background: transparent;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.9rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	line-height: 1.2;
+	text-align: center;
+	text-decoration: none;
+	overflow-wrap: normal;
+	transition:
+		color 180ms ease,
+		background-color 180ms ease;
+}
+
+.villa-antares-introduction__cta:hover {
+	color: var(--wp--preset--color--surface);
+	background: var(--wp--preset--color--text);
+}
+
+.villa-antares-introduction__media {
+	position: relative;
+	z-index: 1;
+	inline-size: 100%;
+	aspect-ratio: 4 / 5;
+	margin: -2rem 0 0;
+	overflow: hidden;
+	background: var(--wp--preset--color--border);
+}
+
+.villa-antares-introduction__image {
+	inline-size: 100%;
+	block-size: 100%;
+	max-inline-size: none;
+	object-fit: cover;
+	object-position:
+		var(--villa-antares-introduction-focal-x, 50%)
+		var(--villa-antares-introduction-focal-y, 50%);
+}
+
+.villa-antares-introduction__vertical-label {
+	display: none;
+}
+
+@media (min-width: 48rem) {
+	.villa-antares-introduction {
+		padding-block: var(--wp--preset--spacing--xl, 4rem);
+		padding-inline-start: max(
+			var(--wp--preset--spacing--md, 2rem),
+			var(--villa-antares-safe-area-left)
+		);
+		padding-inline-end: max(
+			var(--wp--preset--spacing--md, 2rem),
+			var(--villa-antares-safe-area-right)
+		);
+	}
+
+	.villa-antares-introduction__text-card {
+		padding:
+			clamp(6.5rem, 14vw, 8rem)
+			clamp(2.5rem, 7vw, 4rem)
+			clamp(4rem, 8vw, 5rem);
+	}
+
+	.villa-antares-introduction__decorative {
+		inset-block-start: clamp(2.75rem, 6vw, 4rem);
+		inset-inline-start: clamp(2.5rem, 7vw, 4rem);
+		max-inline-size: calc(100% - clamp(5rem, 14vw, 8rem));
+		font-size: clamp(4rem, 9vw, 6rem);
+	}
+
+	.villa-antares-introduction__marker {
+		font-size: 1rem;
+	}
+
+	.villa-antares-introduction__title {
+		font-size: clamp(3rem, 7vw, 4rem);
+	}
+
+	.villa-antares-introduction__media {
+		margin-block-start: -2.5rem;
+	}
+}
+
+@media (min-width: 64rem) {
+	.villa-antares-introduction {
+		padding-block: clamp(6rem, 8vw, 8rem);
+		padding-inline: var(--wp--preset--spacing--md, 2rem);
+	}
+
+	.villa-antares-introduction__layout {
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+		align-items: center;
+	}
+
+	.villa-antares-introduction__text-card,
+	.villa-antares-introduction__media {
+		grid-area: 1 / 1;
+	}
+
+	.villa-antares-introduction__text-card {
+		z-index: 2;
+		inline-size: 58%;
+		padding:
+			clamp(6.5rem, 8vw, 8rem)
+			clamp(3rem, 4vw, 4.75rem)
+			clamp(3.5rem, 4vw, 4.75rem);
+		justify-self: start;
+	}
+
+	.villa-antares-introduction__decorative {
+		inset-block-start: clamp(2.5rem, 3.5vw, 3.5rem);
+		inset-inline-start: clamp(3rem, 4vw, 4.75rem);
+		max-inline-size: calc(100% - clamp(6rem, 8vw, 9.5rem));
+		font-size: clamp(4rem, 5vw, 5.5rem);
+	}
+
+	.villa-antares-introduction__title {
+		max-inline-size: none;
+		margin-block-start: clamp(1.75rem, 2.5vw, 2.5rem);
+		font-size: clamp(2.75rem, 3.8vw, 4rem);
+	}
+
+	.villa-antares-introduction__body {
+		margin-block-start: clamp(1.75rem, 2.5vw, 2.5rem);
+		font-size: 1rem;
+		line-height: 1.6;
+	}
+
+	.villa-antares-introduction__body > p + p {
+		margin-block-start: 0.75rem;
+	}
+
+	.villa-antares-introduction__body > p:last-child {
+		margin-block-start: 1.1rem;
+	}
+
+	.villa-antares-introduction__cta {
+		inline-size: auto;
+		min-inline-size: 15rem;
+		margin-block-start: clamp(1.75rem, 2.5vw, 2.5rem);
+	}
+
+	.villa-antares-introduction__media {
+		z-index: 1;
+		inline-size: 52%;
+		margin: 0;
+		justify-self: end;
+	}
+}
+
+@media (min-width: 80rem) {
+	.villa-antares-introduction__layout {
+		inline-size: calc(100% - 5.5rem);
+	}
+
+	.villa-antares-introduction__vertical-label {
+		position: absolute;
+		inset-block-start: 90%;
+		inset-inline-end: max(
+			1.25rem,
+			var(--villa-antares-safe-area-right)
+		);
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		color: var(--wp--preset--color--text);
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		line-height: 1;
+		text-transform: uppercase;
+		transform: translateY(-50%);
+		writing-mode: vertical-rl;
+	}
+
+	.villa-antares-introduction__vertical-line {
+		inline-size: 1px;
+		block-size: 7rem;
+		background: var(--wp--preset--color--accent);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.villa-antares-introduction__cta {
+		transition: none;
+	}
+}
+
+/**
+ * Introduction block editor.
+ */
+
+.villa-antares-introduction-editor {
+	display: grid;
+	gap: 1.25rem;
+	padding: clamp(1rem, 2vw, 2rem);
+	color: #27251f;
+	background: #f6f2e9;
+}
+
+.villa-antares-introduction-editor__text,
+.villa-antares-introduction-editor__media {
+	min-inline-size: 0;
+	padding: clamp(1.25rem, 3vw, 2.5rem);
+	background: #fffdf8;
+}
+
+.villa-antares-introduction-editor__decorative {
+	display: block;
+	margin-block-end: 1rem;
+	color: #9f9a8f;
+	font-size: clamp(2rem, 5vw, 4rem);
+	font-style: italic;
+	line-height: 1;
+}
+
+.villa-antares-introduction-editor__marker {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	color: #b08354;
+}
+
+.villa-antares-introduction-editor__marker > span:nth-child(2) {
+	inline-size: 3rem;
+	block-size: 1px;
+	background: #68645a;
+}
+
+.villa-antares-introduction-editor__title {
+	margin: 1.5rem 0;
+	font-size: clamp(2rem, 5vw, 3.5rem);
+	font-weight: 400;
+	letter-spacing: 0.08em;
+	line-height: 1.05;
+}
+
+.villa-antares-introduction-editor__body {
+	color: #68645a;
+	line-height: 1.65;
+}
+
+.villa-antares-introduction-editor__body p {
+	margin-block: 0 0.75rem;
+}
+
+.villa-antares-introduction-editor__cta {
+	display: flex;
+	min-block-size: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	padding: 0.75rem 1.5rem;
+	margin-block-start: 1.5rem;
+	border: 2px solid #27251f;
+	border-radius: 999px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+}
+
+.villa-antares-introduction-editor__media img,
+.villa-antares-introduction-editor__placeholder {
+	inline-size: 100%;
+	aspect-ratio: 4 / 5;
+	object-fit: cover;
+	background: #ded8ca;
+}
+
+.villa-antares-introduction-editor__placeholder {
+	display: grid;
+	padding: 1.5rem;
+	place-items: center;
+	color: #68645a;
+	text-align: center;
+}
+
+.villa-antares-introduction-editor__media-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-block-start: 1rem;
+}
+
+@media (min-width: 64rem) {
+	.villa-antares-introduction-editor {
+		grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 0.9fr);
+	}
+}
