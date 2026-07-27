@@ -1844,3 +1844,369 @@ html.villa-antares-menu-open body {
 		margin-inline-start: auto;
 	}
 }
+
+/**
+ * Features.
+ */
+
+.villa-antares-features {
+	inline-size: 100%;
+	max-inline-size: none;
+	padding-block: var(--wp--preset--spacing--xl, 4rem);
+	padding-inline: max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-left)
+	) max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-right)
+	);
+	margin: 0;
+	color: var(--wp--preset--color--text);
+	background: var(--wp--preset--color--canvas);
+	scroll-margin-top: 1rem;
+}
+
+.villa-antares-features__inner {
+	inline-size: 100%;
+	max-inline-size: 90rem;
+	margin-inline: auto;
+}
+
+.villa-antares-features__eyebrow {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 0;
+	color: var(--wp--preset--color--accent) !important;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.85rem !important;
+	letter-spacing: 0.08em;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.villa-antares-features__eyebrow-number,
+.villa-antares-features__eyebrow-label {
+	color: inherit;
+}
+
+.villa-antares-features__eyebrow-line {
+	inline-size: clamp(2.5rem, 10vw, 4rem);
+	flex: 0 0 auto;
+	block-size: 1px;
+	background: var(--wp--preset--color--muted);
+}
+
+.villa-antares-features__title {
+	margin: clamp(1.5rem, 6vw, 2.5rem) 0 0;
+	color: inherit;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(2.75rem, 12vw, 5.5rem);
+	font-weight: 400;
+	letter-spacing: -0.045em;
+	line-height: 0.96;
+	overflow-wrap: anywhere;
+}
+
+.villa-antares-features__categories {
+	display: grid;
+	margin-block-start: clamp(3rem, 11vw, 5rem);
+	border-block-start: 1px solid var(--wp--preset--color--border);
+}
+
+.villa-antares-features__category {
+	min-inline-size: 0;
+	padding-block: clamp(2rem, 7vw, 3rem);
+	border-block-end: 1px solid var(--wp--preset--color--border);
+}
+
+.villa-antares-features__category-heading {
+	display: flex !important;
+	gap: 0.75rem;
+	align-items: center;
+	margin: 0;
+}
+
+.villa-antares-features__category-number {
+	flex: 0 0 auto;
+	margin: 0;
+	color: var(--wp--preset--color--accent);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.75rem;
+	letter-spacing: 0.08em;
+	line-height: 1;
+}
+
+.villa-antares-features__category-title {
+	display: flex;
+	flex: 1 1 auto;
+	gap: 0.75rem;
+	align-items: center;
+	min-inline-size: 0;
+	margin: 0;
+	color: inherit;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(1.4rem, 6vw, 2rem);
+	font-weight: 400;
+	line-height: 1.1;
+}
+
+.villa-antares-features__category-title::after {
+	flex: 1 1 auto;
+	block-size: 1px;
+	background: var(--wp--preset--color--border);
+	content: "";
+}
+
+.villa-antares-features__list {
+	padding: 0;
+	margin: clamp(1.5rem, 6vw, 2.25rem) 0 0;
+	list-style: none;
+	color: var(--wp--preset--color--muted);
+	font-size: clamp(0.975rem, 0.95rem + 0.12vw, 1.05rem);
+	line-height: 1.5;
+}
+
+.villa-antares-features__list li {
+	position: relative;
+	padding-inline-start: 1rem;
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+.villa-antares-features__list li::before {
+	position: absolute;
+	inset-block-start: 0.72em;
+	inset-inline-start: 0;
+	inline-size: 0.28rem;
+	block-size: 1px;
+	background: var(--wp--preset--color--accent);
+	content: "";
+}
+
+.villa-antares-features__list li + li {
+	margin-block-start: 0.6rem;
+}
+
+@media (min-width: 64rem) {
+	.villa-antares-features {
+		padding-block: clamp(6rem, 9vw, 9rem);
+		padding-inline: var(--wp--preset--spacing--md, 2rem);
+	}
+
+	.villa-antares-features__title {
+		font-size: clamp(4rem, 6.5vw, 7rem);
+	}
+
+	.villa-antares-features__categories {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.villa-antares-features__category {
+		padding: clamp(2.5rem, 4vw, 4.5rem) clamp(2rem, 4vw, 4rem);
+		border-block-end: 0;
+	}
+
+	.villa-antares-features__category:first-child {
+		padding-inline-start: 0;
+	}
+
+	.villa-antares-features__category + .villa-antares-features__category {
+		border-inline-start: 1px solid var(--wp--preset--color--border);
+	}
+
+	.villa-antares-features__category:last-child {
+		padding-inline-end: 0;
+	}
+}
+
+/**
+ * Location.
+ */
+
+.villa-antares-location {
+	inline-size: 100%;
+	max-inline-size: none;
+	padding-block-start: var(--wp--preset--spacing--xl, 4rem);
+	padding-inline: max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-left)
+	) max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-right)
+	);
+	margin: 0;
+	color: var(--wp--preset--color--surface);
+	background: var(--wp--preset--color--text);
+	scroll-margin-top: 1rem;
+}
+
+.villa-antares-location__inner {
+	inline-size: 100%;
+	max-inline-size: 90rem;
+	margin-inline: auto;
+}
+
+.villa-antares-location__eyebrow {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 0;
+	color: var(--wp--preset--color--accent) !important;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.85rem !important;
+	letter-spacing: 0.08em;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.villa-antares-location__eyebrow-number,
+.villa-antares-location__eyebrow-label {
+	color: inherit;
+}
+
+.villa-antares-location__eyebrow-line {
+	inline-size: clamp(2.5rem, 10vw, 4rem);
+	flex: 0 0 auto;
+	block-size: 1px;
+	background: color-mix(in srgb, var(--wp--preset--color--surface) 55%, transparent);
+}
+
+.villa-antares-location__title {
+	margin: clamp(1.5rem, 6vw, 2.5rem) 0 0;
+	color: inherit;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(2.75rem, 12vw, 5.5rem);
+	font-weight: 400;
+	letter-spacing: -0.045em;
+	line-height: 0.96;
+	overflow-wrap: anywhere;
+}
+
+.villa-antares-location__intro {
+	max-inline-size: 62ch;
+	margin: clamp(2rem, 8vw, 3rem) 0 0;
+	color: color-mix(in srgb, var(--wp--preset--color--surface) 78%, transparent);
+	font-size: clamp(1.05rem, 1rem + 0.25vw, 1.25rem);
+	line-height: 1.6;
+}
+
+.villa-antares-location__distances {
+	display: grid;
+	margin-block-start: clamp(3rem, 11vw, 5rem);
+	border-block-start: 1px solid rgb(255 253 248 / 28%);
+}
+
+.villa-antares-location__distance {
+	--villa-antares-location-distance-padding: clamp(1.25rem, 2vw, 2.5rem);
+	min-inline-size: 0;
+	padding-block: 1.5rem;
+	border-block-end: 1px solid rgb(255 253 248 / 28%);
+}
+
+.villa-antares-location__distance-value,
+.villa-antares-location__distance-label {
+	margin: 0;
+}
+
+.villa-antares-location__distance-value {
+	color: inherit;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(1.65rem, 7vw, 2.5rem);
+	font-weight: 400;
+	letter-spacing: -0.035em;
+	line-height: 1;
+}
+
+.villa-antares-location__distance-label {
+	margin-block-start: 0.55rem;
+	color: color-mix(in srgb, var(--wp--preset--color--surface) 78%, transparent);
+	font-size: clamp(0.9rem, 0.875rem + 0.1vw, 1rem);
+	line-height: 1.45;
+	overflow-wrap: anywhere;
+}
+
+.villa-antares-map {
+	display: block;
+	inline-size: 100%;
+	max-inline-size: none;
+	aspect-ratio: 3 / 2;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background: var(--wp--preset--color--border);
+}
+
+.villa-antares-map__embed,
+.villa-antares-map__embed iframe {
+	display: block;
+	inline-size: 100%;
+	block-size: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.villa-antares-map__embed {
+	block-size: 100%;
+	min-block-size: 20rem;
+}
+
+.villa-antares-map__embed iframe {
+	border: 0;
+}
+
+@media (min-width: 37.5rem) {
+	.villa-antares-location__distances {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.villa-antares-location__distance {
+		padding-inline: clamp(1.5rem, 5vw, 3rem);
+	}
+
+	.villa-antares-location__distance:nth-child(odd) {
+		padding-inline-start: 0;
+	}
+
+	.villa-antares-location__distance:nth-child(even) {
+		border-inline-start: 1px solid rgb(255 253 248 / 28%);
+	}
+}
+
+@media (min-width: 64rem) {
+	.villa-antares-location {
+		padding-block-start: clamp(6rem, 9vw, 9rem);
+		padding-inline: var(--wp--preset--spacing--md, 2rem);
+	}
+
+	.villa-antares-location__title {
+		font-size: clamp(4rem, 6.5vw, 7rem);
+	}
+
+	.villa-antares-location__distances {
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+	}
+
+	.villa-antares-location__distance {
+		padding-block: clamp(1.75rem, 3vw, 3rem);
+		padding-inline: var(--villa-antares-location-distance-padding);
+		border-block-end: 0;
+	}
+
+	.villa-antares-location__distance + .villa-antares-location__distance {
+		border-inline-start: 1px solid rgb(255 253 248 / 28%);
+	}
+
+	.villa-antares-location__distance:first-child {
+		padding-inline-start: 0;
+	}
+
+	.villa-antares-location__distance:last-child {
+		padding-inline-end: 0;
+	}
+
+	.villa-antares-map {
+		aspect-ratio: 16 / 7;
+	}
+}
