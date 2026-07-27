@@ -113,6 +113,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 >
 	<div class="villa-antares-introduction__layout">
 		<div class="villa-antares-introduction__text-card">
+			
 			<div class="villa-antares-introduction__marker">
 				<span><?php echo esc_html( $section_number ); ?></span>
 				<span
@@ -121,6 +122,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 				></span>
 				<span><?php echo esc_html( $eyebrow ); ?></span>
 			</div>
+			
 
 			<h2
 				id="villa-antares-introduction-title"

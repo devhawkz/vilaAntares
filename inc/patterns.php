@@ -29,7 +29,11 @@ function villa_antares_get_about_pattern_content() {
 <!-- /wp:image -->
 
 <!-- wp:group {"className":"villa-antares-about__card","layout":{"type":"constrained"}} -->
-<div class="wp-block-group villa-antares-about__card"><!-- wp:heading {"level":2,"className":"villa-antares-about__title"} -->
+<div class="wp-block-group villa-antares-about__card"><!-- wp:paragraph {"className":"villa-antares-about__eyebrow"} -->
+<p class="villa-antares-about__eyebrow"><span class="villa-antares-about__eyebrow-number">02</span><span class="villa-antares-about__eyebrow-line" aria-hidden="true"></span><span class="villa-antares-about__eyebrow-label">About</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2,"className":"villa-antares-about__title"} -->
 <h2 class="wp-block-heading villa-antares-about__title">VILLA ANTARES —</h2>
 <!-- /wp:heading -->
 
@@ -158,7 +162,103 @@ BLOCKS;
 }
 
 /**
- * Registers the About pattern in the block inserter.
+ * Returns the editable Sustainable Luxury block pattern.
+ *
+ * @return string
+ */
+function villa_antares_get_sustainability_pattern_content() {
+	return <<<'BLOCKS'
+<!-- wp:group {"tagName":"section","anchor":"sustainability","className":"villa-antares-sustainability","layout":{"type":"constrained"}} -->
+<section id="sustainability" class="wp-block-group villa-antares-sustainability"><!-- wp:group {"className":"villa-antares-sustainability__inner","layout":{"type":"constrained"}} -->
+<div class="wp-block-group villa-antares-sustainability__inner"><!-- wp:paragraph {"className":"villa-antares-sustainability__eyebrow"} -->
+<p class="villa-antares-sustainability__eyebrow"><span class="villa-antares-sustainability__eyebrow-number">03</span><span class="villa-antares-sustainability__eyebrow-line" aria-hidden="true"></span><span class="villa-antares-sustainability__eyebrow-label">Sustainable Luxury</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2,"className":"villa-antares-sustainability__title"} -->
+<h2 class="wp-block-heading villa-antares-sustainability__title">Sustainable Luxury</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"villa-antares-sustainability__intro"} -->
+<p class="villa-antares-sustainability__intro">Beyond its beauty, Villa Antares offers exceptional self-sufficiency and modern infrastructure:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"villa-antares-sustainability__list","layout":{"type":"constrained"}} -->
+<div class="wp-block-group villa-antares-sustainability__list">
+<!-- wp:group {"className":"villa-antares-sustainability__item","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group villa-antares-sustainability__item"><!-- wp:paragraph {"className":"villa-antares-sustainability__number"} -->
+<p class="villa-antares-sustainability__number">01</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Private spring water supply servicing the residence, swimming pools, and organic gardens</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"villa-antares-sustainability__item","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group villa-antares-sustainability__item"><!-- wp:paragraph {"className":"villa-antares-sustainability__number"} -->
+<p class="villa-antares-sustainability__number">02</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Ecological vegetable garden</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"villa-antares-sustainability__item","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group villa-antares-sustainability__item"><!-- wp:paragraph {"className":"villa-antares-sustainability__number"} -->
+<p class="villa-antares-sustainability__number">03</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Solar energy system</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"villa-antares-sustainability__item","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group villa-antares-sustainability__item"><!-- wp:paragraph {"className":"villa-antares-sustainability__number"} -->
+<p class="villa-antares-sustainability__number">04</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Backup power generator</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"villa-antares-sustainability__item","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group villa-antares-sustainability__item"><!-- wp:paragraph {"className":"villa-antares-sustainability__number"} -->
+<p class="villa-antares-sustainability__number">05</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Underfloor heating throughout the property</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"villa-antares-sustainability__item","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group villa-antares-sustainability__item"><!-- wp:paragraph {"className":"villa-antares-sustainability__number"} -->
+<p class="villa-antares-sustainability__number">06</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Premium climate control systems</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"villa-antares-sustainability__item","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group villa-antares-sustainability__item"><!-- wp:paragraph {"className":"villa-antares-sustainability__number"} -->
+<p class="villa-antares-sustainability__number">07</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Fireplaces creating warmth and ambiance throughout the seasons</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:paragraph {"className":"villa-antares-sustainability__outro"} -->
+<p class="villa-antares-sustainability__outro">This rare combination of sustainability and luxury ensures comfort, independence, and peace of mind throughout the year.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></section>
+<!-- /wp:group -->
+BLOCKS;
+}
+
+/**
+ * Registers the theme patterns in the block inserter.
  *
  * @return void
  */
@@ -170,6 +270,16 @@ function villa_antares_register_patterns() {
 			'description' => esc_html__( 'Eight editable editorial text and image rows for the About section.', 'vila-antares' ),
 			'categories'  => array( 'featured' ),
 			'content'     => villa_antares_get_about_pattern_content(),
+		)
+	);
+
+	register_block_pattern(
+		'villa-antares/sustainable-luxury',
+		array(
+			'title'       => esc_html__( 'Sustainable Luxury', 'vila-antares' ),
+			'description' => esc_html__( 'Editable sustainable luxury editorial section with seven benefits.', 'vila-antares' ),
+			'categories'  => array( 'featured' ),
+			'content'     => villa_antares_get_sustainability_pattern_content(),
 		)
 	);
 }
