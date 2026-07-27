@@ -1381,6 +1381,207 @@ html.villa-antares-menu-open body {
 }
 
 /**
+ * About Villa Antares.
+ */
+
+.villa-antares-about {
+	inline-size: 100%;
+	max-inline-size: none;
+	padding-block: var(--wp--preset--spacing--xl, 4rem);
+	padding-inline: max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-left)
+	) max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-right)
+	);
+	margin: 0;
+	background: var(--wp--preset--color--canvas);
+	scroll-margin-top: 1rem;
+}
+
+.villa-antares-about__rows {
+	display: grid;
+	gap: var(--wp--preset--spacing--lg, 3rem);
+	max-inline-size: 90rem;
+	margin-inline: auto;
+}
+
+.villa-antares-about__row {
+	display: grid;
+	gap: 0;
+	min-inline-size: 0;
+	margin: 0;
+}
+
+.villa-antares-about__card,
+.villa-antares-about__media {
+	min-inline-size: 0;
+	margin: 0;
+}
+
+.villa-antares-about__card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow: hidden;
+	padding: clamp(2rem, 8vw, 3.5rem) clamp(1.25rem, 6vw, 2rem);
+	color: var(--wp--preset--color--text);
+	background: rgb(255 253 248 / 90%);
+}
+
+.villa-antares-about__card > * {
+	position: relative;
+	z-index: 1;
+	max-inline-size: 62ch;
+	margin: 0;
+}
+
+.villa-antares-about__card > * + * {
+	margin-block-start: 1rem;
+}
+
+.villa-antares-about__card > p {
+	color: var(--wp--preset--color--muted);
+	font-size: clamp(1rem, 0.975rem + 0.15vw, 1.075rem);
+	line-height: 1.65;
+}
+
+.villa-antares-about__title,
+.villa-antares-about__heading {
+	color: var(--wp--preset--color--text);
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 400;
+	line-height: 1.08;
+	overflow-wrap: anywhere;
+}
+
+.villa-antares-about__title {
+	font-size: clamp(2rem, 9vw, 3.75rem);
+	letter-spacing: 0.075em;
+	text-transform: uppercase;
+}
+
+.villa-antares-about__subtitle {
+	color: var(--wp--preset--color--accent) !important;
+	font-size: clamp(1rem, 3.6vw, 1.2rem) !important;
+	letter-spacing: 0.025em;
+}
+
+.villa-antares-about__heading {
+	font-size: clamp(1.7rem, 7vw, 2.75rem);
+}
+
+.villa-antares-about__media {
+	display: block;
+	order: -1;
+	inline-size: 100%;
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
+	background: var(--wp--preset--color--border);
+}
+
+.villa-antares-about__media img {
+	inline-size: 100%;
+	block-size: 100%;
+	max-inline-size: none;
+	object-fit: cover;
+}
+
+.villa-antares-about__card::before {
+	position: absolute;
+	display: none;
+	inset-block-start: clamp(1.5rem, 4vw, 3rem);
+	inset-inline-start: clamp(1.25rem, 5vw, 3.5rem);
+	max-inline-size: calc(100% - 2.5rem);
+	color: rgba(39, 37, 31, 0.07);
+	content: "Villa Antares";
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(2.5rem, 9vw, 5.5rem);
+	font-style: italic;
+	font-weight: 400;
+	letter-spacing: -0.06em;
+	line-height: 1;
+	white-space: nowrap;
+}
+
+@media (min-width: 64rem) {
+	.villa-antares-about__card::before {
+		display: block;
+	}
+
+	.villa-antares-about {
+		padding-block: clamp(6rem, 8vw, 8rem);
+		padding-inline: var(--wp--preset--spacing--md, 2rem);
+	}
+
+	.villa-antares-about__rows {
+		gap: clamp(4rem, 7vw, 7rem);
+	}
+
+	.villa-antares-about__row {
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+		min-block-size: clamp(34rem, 48vw, 50rem);
+		align-items: center;
+	}
+
+	.villa-antares-about__row--image-first > .villa-antares-about__media {
+		grid-column: 1;
+		grid-row: 1;
+		justify-self: start;
+	}
+
+	.villa-antares-about__row--image-first > .villa-antares-about__card {
+		grid-column: 1;
+		grid-row: 1;
+		justify-self: end;
+	}
+
+	.villa-antares-about__row--text-first > .villa-antares-about__card {
+		grid-column: 1;
+		grid-row: 1;
+		justify-self: start;
+	}
+
+	.villa-antares-about__row--text-first > .villa-antares-about__media {
+		grid-column: 1;
+		grid-row: 1;
+		justify-self: end;
+	}
+
+	.villa-antares-about__card {
+		z-index: 2;
+		inline-size: 58%;
+		min-block-size: clamp(25rem, 32vw, 34rem);
+		padding: clamp(4.5rem, 6vw, 6.5rem) clamp(3rem, 5vw, 5.5rem);
+	}
+
+	.villa-antares-about__media {
+		z-index: 1;
+		inline-size: 61%;
+		block-size: 100%;
+		min-block-size: clamp(34rem, 48vw, 50rem);
+		aspect-ratio: auto;
+	}
+
+	.villa-antares-about__card::after {
+		position: absolute;
+		inset-block: 34%;
+		inset-inline-end: clamp(1.5rem, 3vw, 3rem);
+		z-index: 1;
+		inline-size: 1px;
+		background: var(--wp--preset--color--accent);
+		content: "";
+	}
+
+	.villa-antares-about__title {
+		font-size: clamp(2.8rem, 4.2vw, 4.25rem);
+	}
+}
+
+/**
  * Introduction block editor.
  */
 

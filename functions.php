@@ -14,3 +14,4 @@ require_once get_stylesheet_directory() . '/inc/assets.php';
 require_once get_stylesheet_directory() . '/inc/header.php';
 require_once get_stylesheet_directory() . '/inc/hero-video.php';
 require_once get_stylesheet_directory() . '/inc/introduction.php';
+require_once get_stylesheet_directory() . '/inc/patterns.php';
