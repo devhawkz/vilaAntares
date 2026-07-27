@@ -409,8 +409,39 @@ function villa_antares_get_map_pattern_content() {
 	return <<<'BLOCKS'
 <!-- wp:group {"tagName":"section","anchor":"map","className":"villa-antares-map","layout":{"type":"constrained"}} -->
 <section id="map" class="wp-block-group villa-antares-map"><!-- wp:html -->
-<div class="villa-antares-map__embed"><iframe title="Villa Antares location in Podličak, Budva" src="https://www.google.com/maps?output=embed&amp;q=VILLA%20ANTARES%2C%20Podli%C4%8Dak%20bb%2C%20Budva%2C%20Montenegro" width="600" height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+<div class="villa-antares-map__embed"><iframe title="Villa Antares location in Podličak, Budva" src="https://www.google.com/maps?output=embed&amp;q=Podli%C4%8Dak%20bb%2C%20Sveti%20Stefan%2C%2085315%2C%20Montenegro" width="600" height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 <!-- /wp:html --></section>
+<!-- /wp:group -->
+BLOCKS;
+}
+
+/**
+ * Gets the editable site footer pattern content.
+ *
+ * @return string
+ */
+function villa_antares_get_footer_pattern_content() {
+	return <<<'BLOCKS'
+<!-- wp:group {"tagName":"footer","anchor":"footer","className":"villa-antares-footer","layout":{"type":"constrained"}} -->
+<footer id="footer" class="wp-block-group villa-antares-footer"><!-- wp:group {"className":"villa-antares-footer__inner","layout":{"type":"constrained"}} -->
+<div class="wp-block-group villa-antares-footer__inner"><!-- wp:paragraph {"className":"villa-antares-footer__name"} -->
+<p class="villa-antares-footer__name">VILLA ANTARES</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"villa-antares-footer__address"} -->
+<p class="villa-antares-footer__address">Podličak bb, Budva, Montenegro</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"villa-antares-footer__contacts","layout":{"type":"constrained"}} -->
+<div class="wp-block-group villa-antares-footer__contacts"><!-- wp:paragraph {"className":"villa-antares-footer__contact","placeholder":"Email address"} -->
+<p class="villa-antares-footer__contact"></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"villa-antares-footer__contact","placeholder":"Instagram URL"} -->
+<p class="villa-antares-footer__contact"></p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></footer>
 <!-- /wp:group -->
 BLOCKS;
 }
@@ -468,6 +499,16 @@ function villa_antares_register_patterns() {
 			'description' => esc_html__( 'Editable full-width Villa Antares location map.', 'vila-antares' ),
 			'categories'  => array( 'featured' ),
 			'content'     => villa_antares_get_map_pattern_content(),
+		)
+	);
+
+	register_block_pattern(
+		'villa-antares/footer',
+		array(
+			'title'       => esc_html__( 'Villa Antares Footer', 'vila-antares' ),
+			'description' => esc_html__( 'Editable Villa Antares footer contact details.', 'vila-antares' ),
+			'categories'  => array( 'featured' ),
+			'content'     => villa_antares_get_footer_pattern_content(),
 		)
 	);
 }

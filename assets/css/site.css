@@ -193,6 +193,11 @@ body {
 	color: inherit;
 }
 
+/* The villa name is already part of the opening video. */
+.home #header [data-id="logo"] .site-title {
+	display: none;
+}
+
 #header .villa-antares-menu-toggle {
 	--villa-antares-menu-toggle-width: 4rem;
 	--villa-antares-menu-toggle-line-width: 2.1rem;
@@ -590,6 +595,59 @@ html.villa-antares-menu-open body {
 		transition-duration: 0.01ms;
 		transition-delay: 0s;
 	}
+}
+
+/**
+ * Full-width gallery.
+ */
+.villa-antares-gallery {
+	inline-size: 100%;
+	max-inline-size: none;
+	padding: 0 !important;
+	margin: 0;
+}
+
+.villa-antares-gallery .vp-portfolio,
+.villa-antares-gallery .vp-portfolio__items-wrap {
+	inline-size: 100%;
+	max-inline-size: none;
+}
+
+.villa-antares-gallery [data-vp-layout="slider"],
+.villa-antares-gallery [data-vp-layout="slider"] .vp-portfolio__items-wrap,
+.villa-antares-gallery [data-vp-layout="slider"] .vp-portfolio__items,
+.villa-antares-gallery [data-vp-layout="slider"] .vp-portfolio__item-wrap,
+.villa-antares-gallery [data-vp-layout="slider"] .vp-portfolio__item,
+.villa-antares-gallery [data-vp-layout="slider"] .vp-portfolio__item-img-wrap,
+.villa-antares-gallery [data-vp-layout="slider"] .vp-portfolio__item-img,
+.villa-antares-gallery [data-vp-layout="slider"] .vp-portfolio__item-img img {
+	block-size: 100vh;
+	block-size: 100dvh;
+}
+
+.villa-antares-gallery [data-vp-layout="slider"] .vp-portfolio__item-img img {
+	inline-size: 100%;
+	object-fit: cover;
+}
+
+.villa-antares-gallery [data-vp-layout="slider"] {
+	--vp-layout-slider--arrows__offset: 1rem;
+}
+
+.villa-antares-gallery [data-vp-layout="slider"] .vp-portfolio__items-arrow {
+	inline-size: 3rem;
+	block-size: 3rem;
+	border: 1px solid rgb(255 253 248 / 72%);
+	border-radius: 50%;
+	color: #fffdf8;
+	background: rgb(18 18 18 / 42%);
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
+}
+
+.villa-antares-gallery [data-vp-layout="slider"] .vp-portfolio__items-arrow:focus-visible {
+	outline: 2px solid #fffdf8;
+	outline-offset: 3px;
 }
 
 /**
@@ -2530,5 +2588,91 @@ html.villa-antares-menu-open body {
 	.villa-antares-contact .ff-el-form-control,
 	.villa-antares-contact .ff-btn-submit {
 		transition: none;
+	}
+}
+
+/**
+ * Site footer.
+ */
+.villa-antares-footer {
+	inline-size: 100%;
+	max-inline-size: none;
+	padding: clamp(4rem, 10vw, 8rem) var(--villa-antares-gutter) clamp(2rem, 5vw, 3rem);
+	margin: 0;
+	color: #fffdf8;
+	background: #050505;
+}
+
+.villa-antares-footer__inner {
+	display: grid;
+	gap: 1.25rem;
+	max-inline-size: 90rem;
+	margin-inline: auto;
+}
+
+.villa-antares-footer__name,
+.villa-antares-footer__address,
+.villa-antares-footer__contact {
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.villa-antares-footer__name {
+	color: var(--wp--preset--color--accent, #c6a76b);
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: clamp(2.5rem, 6vw, 4.75rem);
+	font-weight: 400;
+	letter-spacing: 0.04em;
+	line-height: 0.95;
+}
+
+.villa-antares-footer__address,
+.villa-antares-footer__contact {
+	color: rgb(255 253 248 / 82%);
+	font-size: clamp(0.95rem, 1vw, 1.05rem);
+	line-height: 1.65;
+}
+
+.villa-antares-footer__contacts {
+	display: grid;
+	gap: 0.65rem;
+	margin-block-start: 1.25rem;
+}
+
+.villa-antares-footer__address::before,
+.villa-antares-footer__contacts::before {
+	display: block;
+	margin-block-end: 0.8rem;
+	color: #fffdf8;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.villa-antares-footer__address::before {
+	content: "Location";
+}
+
+.villa-antares-footer__contacts::before {
+	content: "Contact";
+}
+
+@media (min-width: 48rem) {
+	.villa-antares-footer__inner {
+		grid-template-columns: minmax(13rem, 1.1fr) minmax(14rem, 1fr) minmax(12rem, 0.85fr);
+		gap: clamp(2rem, 5vw, 5.5rem);
+		align-items: start;
+	}
+
+	.villa-antares-footer__address {
+		padding-inline-start: clamp(2rem, 5vw, 5.5rem);
+		border-inline-start: 1px solid rgb(255 253 248 / 42%);
+	}
+
+	.villa-antares-footer__contacts {
+		margin-block-start: 0;
 	}
 }
