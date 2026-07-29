@@ -107,7 +107,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	)
 );
 ?>
-<section id="introduction"
+<section
 	<?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped by get_block_wrapper_attributes(). ?>
 	aria-labelledby="villa-antares-introduction-title"
 >

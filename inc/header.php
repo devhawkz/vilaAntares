@@ -280,6 +280,23 @@ function villa_antares_render_overlay_navigation() {
 		aria-hidden="true"
 		inert
 	>
+		<button
+			class="villa-antares-menu__close"
+			type="button"
+			data-villa-antares-menu-close
+			aria-label="<?php echo esc_attr__( 'Close navigation', 'vila-antares' ); ?>"
+		>
+			<svg
+				viewBox="0 0 32 32"
+				width="32"
+				height="32"
+				aria-hidden="true"
+				focusable="false"
+			>
+				<path d="M7 7 25 25M25 7 7 25"></path>
+			</svg>
+		</button>
+
 		<div class="villa-antares-menu__scroll">
 			<div class="villa-antares-menu__content villa-antares-container">
 				<nav

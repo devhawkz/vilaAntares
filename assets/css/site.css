@@ -283,6 +283,7 @@ body {
 
 .villa-antares-menu-open #header {
 	position: fixed;
+	z-index: calc(var(--villa-antares-menu-layer) - 1);
 	inset: 0 0 auto;
 	inline-size: 100%;
 }
@@ -351,6 +352,40 @@ html.villa-antares-menu-open body {
 		transform var(--villa-antares-menu-duration)
 			var(--villa-antares-menu-easing),
 		visibility 0s;
+}
+
+.villa-antares-menu__close {
+	position: absolute;
+	z-index: 1;
+	inset-block-start: max(1rem, var(--villa-antares-safe-area-top));
+	inset-inline-end: max(
+		var(--villa-antares-gutter),
+		var(--villa-antares-safe-area-right)
+	);
+	display: inline-grid;
+	inline-size: var(--villa-antares-touch-target);
+	block-size: var(--villa-antares-touch-target);
+	padding: 0;
+	place-items: center;
+	border: 0;
+	color: var(--wp--preset--color--text);
+	background: transparent;
+	box-shadow: none;
+	cursor: pointer;
+	transition: color 180ms ease;
+}
+
+.villa-antares-menu__close:is(:hover, :focus-visible) {
+	color: var(--wp--preset--color--accent);
+}
+
+.villa-antares-menu__close svg {
+	inline-size: 2rem;
+	block-size: 2rem;
+	fill: none;
+	stroke: currentColor;
+	stroke-linecap: square;
+	stroke-width: 2;
 }
 
 .villa-antares-menu__scroll {
@@ -1885,25 +1920,51 @@ html.villa-antares-menu-open body {
  */
 
 .villa-antares-sustainability {
+	--villa-antares-sustainability-padding-block:
+		var(--wp--preset--spacing--xl, 4rem);
+	--villa-antares-sustainability-padding-inline-start:
+		max(
+			var(--villa-antares-gutter),
+			var(--villa-antares-safe-area-left)
+		);
+	--villa-antares-sustainability-padding-inline-end:
+		max(
+			var(--villa-antares-gutter),
+			var(--villa-antares-safe-area-right)
+		);
+	display: grid;
 	inline-size: 100%;
 	max-inline-size: none;
-	padding-block: var(--wp--preset--spacing--xl, 4rem);
-	padding-inline: max(
-		var(--villa-antares-gutter),
-		var(--villa-antares-safe-area-left)
-	) max(
-		var(--villa-antares-gutter),
-		var(--villa-antares-safe-area-right)
-	);
+	gap: 0;
+	grid-template-rows: repeat(2, minmax(0, 1fr));
+	padding: 0;
 	margin: 0;
 	color: var(--wp--preset--color--surface);
 	background: var(--wp--preset--color--text);
 	scroll-margin-top: 1rem;
 }
 
+.villa-antares-sustainability::after {
+	inline-size: 100%;
+	min-block-size: 0;
+	background-image: url("../img/villa-antares-converted-from-jpeg.webp");
+	background-repeat: no-repeat;
+	background-position: 42% center;
+	background-size: cover;
+	content: "";
+}
+
 .villa-antares-sustainability__inner {
 	inline-size: 100%;
-	max-inline-size: 90rem;
+	max-inline-size: calc(
+		90rem +
+		var(--villa-antares-sustainability-padding-inline-start) +
+		var(--villa-antares-sustainability-padding-inline-end)
+	);
+	padding-block: var(--villa-antares-sustainability-padding-block);
+	padding-inline:
+		var(--villa-antares-sustainability-padding-inline-start)
+		var(--villa-antares-sustainability-padding-inline-end);
 	margin-inline: auto;
 }
 
@@ -1953,7 +2014,7 @@ html.villa-antares-menu-open body {
 }
 
 .villa-antares-sustainability__intro
-	+ .villa-antares-sustainability__intro {
+{
 	margin-block-start: 1.25rem;
 }
 
@@ -2002,10 +2063,20 @@ html.villa-antares-menu-open body {
 	line-height: 1.5;
 }
 
+@media (max-width: 47.999rem) {
+	.villa-antares-sustainability {
+		grid-template-rows: auto 100svh;
+	}
+}
+
 @media (min-width: 64rem) {
 	.villa-antares-sustainability {
-		padding-block: clamp(6rem, 9vw, 9rem);
-		padding-inline: var(--wp--preset--spacing--md, 2rem);
+		--villa-antares-sustainability-padding-block:
+			clamp(6rem, 9vw, 9rem);
+		--villa-antares-sustainability-padding-inline-start:
+			var(--wp--preset--spacing--md, 2rem);
+		--villa-antares-sustainability-padding-inline-end:
+			var(--wp--preset--spacing--md, 2rem);
 	}
 
 	.villa-antares-sustainability__title {
@@ -2340,6 +2411,23 @@ html.villa-antares-menu-open body {
 
 .villa-antares-map__embed iframe {
 	border: 0;
+}
+
+@media (max-width: 47.999rem) {
+	.entry-content > .villa-antares-gallery,
+	.entry-content.is-layout-constrained > .villa-antares-gallery,
+	.entry-content > .villa-antares-map,
+	.entry-content.is-layout-constrained > .villa-antares-map {
+		inline-size: 100vw;
+		max-inline-size: 100vw !important;
+		margin-inline: calc(50% - 50vw) !important;
+	}
+
+	.entry-content > .villa-antares-map,
+	.entry-content.is-layout-constrained > .villa-antares-map {
+		block-size: 100svh;
+		aspect-ratio: auto;
+	}
 }
 
 @media (min-width: 37.5rem) {

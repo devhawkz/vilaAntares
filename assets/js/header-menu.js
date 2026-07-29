@@ -11,7 +11,9 @@
 	}
 
 	const root = document.documentElement;
-	const header = document.querySelector('#header');
+	const closeButton = panel.querySelector(
+		'[data-villa-antares-menu-close]'
+	);
 	const openLabel = panel.dataset.openLabel || 'Open navigation';
 	const closeLabel = panel.dataset.closeLabel || 'Close navigation';
 	const focusableSelector = [
@@ -41,18 +43,10 @@
 		});
 	};
 
-	const getFocusables = () => {
-		const headerItems = header
-			? Array.from(header.querySelectorAll(focusableSelector)).filter(
-				isVisible
-			)
-			: toggles.filter(isVisible);
-		const panelItems = Array.from(
+	const getFocusables = () =>
+		Array.from(
 			panel.querySelectorAll(focusableSelector)
 		).filter(isVisible);
-
-		return [...headerItems, ...panelItems];
-	};
 
 	const setBackgroundInert = (enabled) => {
 		const parent = panel.parentElement;
@@ -62,10 +56,7 @@
 		}
 
 		Array.from(parent.children).forEach((element) => {
-			if (
-				element === panel ||
-				element.matches('#header, [data-header]')
-			) {
+			if (element === panel) {
 				return;
 			}
 
@@ -115,10 +106,10 @@
 				return;
 			}
 
-			const firstLink = panel.querySelector('a[href]');
+			const firstItem = getFocusables()[0];
 
-			if (firstLink && isVisible(firstLink)) {
-				firstLink.focus({ preventScroll: true });
+			if (firstItem) {
+				firstItem.focus({ preventScroll: true });
 			}
 		});
 	};
@@ -170,6 +161,13 @@
 			}
 		});
 	});
+
+	if (closeButton) {
+		closeButton.addEventListener('click', (event) => {
+			event.preventDefault();
+			closeMenu();
+		});
+	}
 
 	panel.addEventListener('click', (event) => {
 		const link = event.target.closest('a[href^="#"]');
@@ -225,7 +223,10 @@
 		const firstItem = focusables[0];
 		const lastItem = focusables[focusables.length - 1];
 
-		if (event.shiftKey && document.activeElement === firstItem) {
+		if (!panel.contains(document.activeElement)) {
+			event.preventDefault();
+			(event.shiftKey ? lastItem : firstItem).focus();
+		} else if (event.shiftKey && document.activeElement === firstItem) {
 			event.preventDefault();
 			lastItem.focus();
 		} else if (
