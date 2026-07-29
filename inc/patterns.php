@@ -179,6 +179,10 @@ function villa_antares_get_sustainability_pattern_content() {
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"className":"villa-antares-sustainability__intro"} -->
+<p class="villa-antares-sustainability__intro">Villa Antares is the ideal choice for those who enjoy nature hiking tours, magnificent landscapes and panoramic sea views overlooking Sveti Stefan, Miločer and Budva riviera. It is located near Čelobrdo hill (cca 700m above sea level).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"villa-antares-sustainability__intro"} -->
 <p class="villa-antares-sustainability__intro">Beyond its beauty, Villa Antares offers exceptional self-sufficiency and modern infrastructure:</p>
 <!-- /wp:paragraph -->
 
@@ -409,7 +413,7 @@ function villa_antares_get_map_pattern_content() {
 	return <<<'BLOCKS'
 <!-- wp:group {"tagName":"section","anchor":"map","className":"villa-antares-map","layout":{"type":"constrained"}} -->
 <section id="map" class="wp-block-group villa-antares-map"><!-- wp:html -->
-<div class="villa-antares-map__embed"><iframe title="Villa Antares location in Podličak, Budva" src="https://www.google.com/maps?output=embed&amp;q=Podli%C4%8Dak%20bb%2C%20Sveti%20Stefan%2C%2085315%2C%20Montenegro" width="600" height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+<div class="villa-antares-map__embed"><iframe title="Villa Antares location in Podličak, Budva" src="https://www.google.com/maps?output=embed&amp;q=42.2695%2C18.8976111&amp;z=17" width="600" height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 <!-- /wp:html --></section>
 <!-- /wp:group -->
 BLOCKS;

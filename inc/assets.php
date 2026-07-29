@@ -35,6 +35,19 @@ function villa_antares_get_asset_version( $relative_path ) {
  * @return void
  */
 function villa_antares_register_assets() {
+	$swiper_style_path = get_stylesheet_directory()
+		. '/assets/vendor/swiper/swiper.min.css';
+
+	if ( file_exists( $swiper_style_path ) ) {
+		wp_register_style(
+			'villa-antares-swiper',
+			get_stylesheet_directory_uri()
+				. '/assets/vendor/swiper/swiper.min.css',
+			array(),
+			'14.0.6'
+		);
+	}
+
 	if ( file_exists( get_stylesheet_directory() . '/assets/css/site.css' ) ) {
 		wp_register_style(
 			'villa-antares-site',
@@ -68,6 +81,23 @@ function villa_antares_register_assets() {
 			true
 		);
 		wp_script_add_data( 'villa-antares-hero-video', 'strategy', 'defer' );
+	}
+
+	$gallery_script_path = get_stylesheet_directory()
+		. '/assets/js/gallery-slider.js';
+
+	if (
+		file_exists( $gallery_script_path )
+		&& function_exists( 'wp_register_script_module' )
+	) {
+		wp_register_script_module(
+			'villa-antares-gallery-slider',
+			get_stylesheet_directory_uri()
+				. '/assets/js/gallery-slider.js',
+			array(),
+			villa_antares_get_asset_version( 'assets/js/gallery-slider.js' ),
+			array( 'in_footer' => true )
+		);
 	}
 
 	$editor_script_path = get_stylesheet_directory() . '/blocks/hero-video/index.js';
@@ -116,6 +146,29 @@ function villa_antares_register_assets() {
 add_action( 'init', 'villa_antares_register_assets', 5 );
 
 /**
+ * Checks whether the current singular page contains the gallery slider.
+ *
+ * @return bool
+ */
+function villa_antares_has_gallery_slider() {
+	if ( ! is_singular() ) {
+		return false;
+	}
+
+	$current_post = get_queried_object();
+
+	if ( ! $current_post instanceof WP_Post ) {
+		return false;
+	}
+
+	return has_block( 'core/gallery', $current_post )
+		&& false !== strpos(
+			$current_post->post_content,
+			'villa-antares-gallery'
+		);
+}
+
+/**
  * Enqueues the child theme global frontend assets.
  *
  * The Hero view script is associated with its block metadata and is therefore
@@ -124,12 +177,32 @@ add_action( 'init', 'villa_antares_register_assets', 5 );
  * @return void
  */
 function villa_antares_enqueue_assets() {
+	$has_gallery_slider = villa_antares_has_gallery_slider();
+
+	if (
+		$has_gallery_slider
+		&& wp_style_is( 'villa-antares-swiper', 'registered' )
+	) {
+		wp_enqueue_style( 'villa-antares-swiper' );
+	}
+
 	if ( wp_style_is( 'villa-antares-site', 'registered' ) ) {
 		wp_enqueue_style( 'villa-antares-site' );
 	}
 
 	if ( wp_script_is( 'villa-antares-header-menu', 'registered' ) ) {
 		wp_enqueue_script( 'villa-antares-header-menu' );
+	}
+
+	if (
+		$has_gallery_slider
+		&& function_exists( 'wp_enqueue_script_module' )
+	) {
+		if ( wp_script_is( 'wp-i18n', 'registered' ) ) {
+			wp_enqueue_script( 'wp-i18n' );
+		}
+
+		wp_enqueue_script_module( 'villa-antares-gallery-slider' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'villa_antares_enqueue_assets', 20 );
