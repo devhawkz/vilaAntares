@@ -142,12 +142,38 @@ $wrapper_attributes = get_block_wrapper_attributes( $wrapper_extra );
 			class="villa-antares-hero__video"
 			data-villa-antares-hero-video
 			aria-label="<?php echo esc_attr( $video_accessible_label ); ?>"
-			autoplay
 			muted
 			loop
 			playsinline
 			preload="metadata"
 		></video>
+
+		<div
+			class="villa-antares-hero__enter"
+			data-villa-antares-enter
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="villa-antares-hero-enter-title"
+		>
+			<div class="villa-antares-hero__enter-inner">
+				<p
+					id="villa-antares-hero-enter-title"
+					class="villa-antares-hero__enter-brand"
+				>
+					<?php echo esc_html( $title ); ?>
+				</p>
+				<p class="villa-antares-hero__enter-text">
+					<?php echo esc_html__( 'Experience the residence', 'vila-antares' ); ?>
+				</p>
+				<button
+					class="villa-antares-hero__enter-button"
+					type="button"
+					data-villa-antares-enter-button
+				>
+					<?php echo esc_html__( 'Enter', 'vila-antares' ); ?>
+				</button>
+			</div>
+		</div>
 	<?php endif; ?>
 
 	<div class="villa-antares-hero__copy">

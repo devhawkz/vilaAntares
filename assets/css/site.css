@@ -857,6 +857,97 @@ html.villa-antares-menu-open body {
 	opacity: 1;
 }
 
+.villa-antares-hero__enter {
+	position: absolute;
+	z-index: 5;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	padding: clamp(1.5rem, 5vw, 3rem);
+	color: #fffdf8;
+	background:
+		linear-gradient(
+			180deg,
+			rgb(12 12 12 / 48%) 0%,
+			rgb(12 12 12 / 62%) 45%,
+			rgb(12 12 12 / 78%) 100%
+		);
+	transition: opacity 420ms ease, visibility 420ms ease;
+}
+
+.villa-antares-hero.is-entered .villa-antares-hero__enter {
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.villa-antares-hero__enter-inner {
+	display: grid;
+	justify-items: center;
+	gap: clamp(0.85rem, 2.5vw, 1.35rem);
+	max-inline-size: 28rem;
+	text-align: center;
+}
+
+.villa-antares-hero__enter-brand {
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(2.25rem, 8vw, 4.5rem);
+	font-weight: 400;
+	letter-spacing: -0.04em;
+	line-height: 0.95;
+}
+
+.villa-antares-hero__enter-text {
+	margin: 0;
+	color: rgb(255 253 248 / 78%);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: clamp(0.95rem, 2.4vw, 1.1rem);
+	letter-spacing: 0.04em;
+	line-height: 1.5;
+}
+
+.villa-antares-hero__enter-button {
+	display: inline-flex;
+	min-inline-size: 10rem;
+	min-block-size: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	margin-block-start: clamp(0.5rem, 2vw, 1rem);
+	padding: 0.75rem 1.75rem;
+	border: 1px solid var(--wp--preset--color--accent, #c6a76b);
+	color: var(--wp--preset--color--text, #121212);
+	background: var(--wp--preset--color--accent, #c6a76b);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	line-height: 1;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition:
+		color 180ms ease,
+		background-color 180ms ease,
+		border-color 180ms ease;
+}
+
+.villa-antares-hero__enter-button:hover {
+	border-color: #fffdf8;
+	color: var(--wp--preset--color--text, #121212);
+	background: #fffdf8;
+}
+
+.villa-antares-hero__enter-button:focus-visible {
+	outline: 2px solid #fffdf8;
+	outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.villa-antares-hero__enter {
+		transition: none;
+	}
+}
+
 /*
  * The supplied landscape master includes a very narrow dark edge along its
  * bottom frame. A restrained centered crop removes it without changing the
@@ -1280,16 +1371,22 @@ html.villa-antares-menu-open body {
 	margin-inline: auto;
 }
 
-.villa-antares-introduction__text-card {
+.villa-antares-introduction__text-top,
+.villa-antares-introduction__text-bottom {
 	position: relative;
 	z-index: 2;
 	min-inline-size: 0;
-	padding:
-		clamp(6rem, 28vw, 7.5rem)
-		clamp(1.25rem, 6vw, 2rem)
-		clamp(3rem, 14vw, 5rem);
+	padding-inline: clamp(1.25rem, 6vw, 2rem);
 	color: var(--wp--preset--color--text);
 	background: var(--wp--preset--color--surface);
+}
+
+.villa-antares-introduction__text-top {
+	padding-block: clamp(6rem, 28vw, 7.5rem) 0;
+}
+
+.villa-antares-introduction__text-bottom {
+	padding-block: 0 clamp(3rem, 14vw, 5rem);
 }
 
 .villa-antares-introduction__decorative {
@@ -1338,6 +1435,7 @@ html.villa-antares-menu-open body {
 	word-break: normal;
 }
 
+.villa-antares-introduction__lead,
 .villa-antares-introduction__body {
 	max-inline-size: 64ch;
 	margin-block-start: clamp(2rem, 9vw, 3rem);
@@ -1347,8 +1445,9 @@ html.villa-antares-menu-open body {
 	line-height: 1.65;
 }
 
+.villa-antares-introduction__lead > p,
 .villa-antares-introduction__body > p {
-	margin: 0;
+	margin: 0 0 30px 0;
 }
 
 .villa-antares-introduction__body > p + p {
@@ -1398,7 +1497,8 @@ html.villa-antares-menu-open body {
 	z-index: 1;
 	inline-size: 100%;
 	aspect-ratio: 4 / 5;
-	margin: 0;
+	
+
 	overflow: hidden;
 	background: var(--wp--preset--color--border);
 }
@@ -1430,11 +1530,17 @@ html.villa-antares-menu-open body {
 		);
 	}
 
-	.villa-antares-introduction__text-card {
-		padding:
-			clamp(6.5rem, 14vw, 8rem)
-			clamp(2.5rem, 7vw, 4rem)
-			clamp(4rem, 8vw, 5rem);
+	.villa-antares-introduction__text-top,
+	.villa-antares-introduction__text-bottom {
+		padding-inline: clamp(2.5rem, 7vw, 4rem);
+	}
+
+	.villa-antares-introduction__text-top {
+		padding-block: clamp(6.5rem, 14vw, 8rem) 0;
+	}
+
+	.villa-antares-introduction__text-bottom {
+		padding-block: 0 clamp(4rem, 8vw, 5rem);
 	}
 
 	.villa-antares-introduction__decorative {
@@ -1462,28 +1568,43 @@ html.villa-antares-menu-open body {
 
 	.villa-antares-introduction__layout {
 		grid-template-columns: 1fr;
-		grid-template-rows: 1fr;
-		align-items: center;
+		/*
+		 * The image is 52% wide with a 4:5 aspect-ratio, so it needs
+		 * 0.52 * (5/4) = 0.65 of the layout's width in height
+		 * (20:13). Giving the layout that exact, definite ratio
+		 * means the two flexible spacer rows below (1fr) share a
+		 * fixed, predictable amount of leftover space instead of an
+		 * open-ended one, so the text-top + text-bottom pair is
+		 * reliably centered as one unit against the image — matching
+		 * the original single-card, centered overlap layout even
+		 * though the markup now has three items.
+		 */
+		grid-template-rows: 1fr auto auto 1fr;
+		aspect-ratio: 20 / 13;
 	}
 
-	.villa-antares-introduction__text-card,
-	.villa-antares-introduction__media {
-		grid-area: 1 / 1;
-	}
-
-	.villa-antares-introduction__text-card {
+	.villa-antares-introduction__text-top,
+	.villa-antares-introduction__text-bottom {
+		grid-column: 1;
 		z-index: 1;
 		inline-size: calc(
 			48% + var(--villa-antares-editorial-overlap)
 		);
-		padding:
-			clamp(6.5rem, 8vw, 8rem)
-			calc(
-				clamp(3rem, 4vw, 4.75rem) +
-					var(--villa-antares-editorial-overlap)
-			)
-			clamp(3.5rem, 4vw, 4.75rem);
+		padding-inline: calc(
+			clamp(3rem, 4vw, 4.75rem) +
+				var(--villa-antares-editorial-overlap)
+		);
 		justify-self: start;
+	}
+
+	.villa-antares-introduction__text-top {
+		grid-row: 2;
+		padding-block: clamp(6.5rem, 8vw, 8rem) 0;
+	}
+
+	.villa-antares-introduction__text-bottom {
+		grid-row: 3;
+		padding-block: 0 clamp(3.5rem, 4vw, 4.75rem);
 	}
 
 	.villa-antares-introduction__decorative {
@@ -1499,10 +1620,23 @@ html.villa-antares-menu-open body {
 		font-size: 4.25rem;
 	}
 
+	.villa-antares-introduction__lead,
 	.villa-antares-introduction__body {
-		margin-block-start: clamp(1.75rem, 2.5vw, 2.5rem);
 		font-size: 1rem;
 		line-height: 1.6;
+	}
+
+	.villa-antares-introduction__lead {
+		margin-block-start: clamp(1.75rem, 2.5vw, 2.5rem);
+	}
+
+	/*
+	 * On desktop the image overlaps beside the text instead of breaking
+	 * the flow, so the first "rest" paragraph must sit as close to the
+	 * lead paragraph as consecutive paragraphs normally do.
+	 */
+	.villa-antares-introduction__body {
+		margin-block-start: 0.75rem;
 	}
 
 	.villa-antares-introduction__body > p + p {
@@ -1520,8 +1654,11 @@ html.villa-antares-menu-open body {
 	}
 
 	.villa-antares-introduction__media {
+		grid-column: 1;
+		grid-row: 1 / 5;
 		z-index: 2;
 		inline-size: 52%;
+		block-size: 100%;
 		margin: 0;
 		justify-self: end;
 	}
@@ -1947,9 +2084,9 @@ html.villa-antares-menu-open body {
 .villa-antares-sustainability::after {
 	inline-size: 100%;
 	min-block-size: 0;
-	background-image: url("../img/villa-antares-converted-from-jpeg.webp");
+	background-image: url("../img/villa-antares-sustainability.webp");
 	background-repeat: no-repeat;
-	background-position: 42% center;
+	background-position: center center;
 	background-size: cover;
 	content: "";
 }
@@ -2063,9 +2200,23 @@ html.villa-antares-menu-open body {
 	line-height: 1.5;
 }
 
-@media (max-width: 47.999rem) {
+.villa-antares-sustainability__view {
+	margin: clamp(2.5rem, 9vw, 4rem) 0 0;
+	color: color-mix(in srgb, var(--wp--preset--color--surface) 78%, transparent);
+	font-size: clamp(1.05rem, 1rem + 0.25vw, 1.25rem);
+	line-height: 1.6;
+}
+
+@media (max-width: 63.999rem) {
 	.villa-antares-sustainability {
-		grid-template-rows: auto 100svh;
+		grid-template-rows: auto auto;
+	}
+
+	.villa-antares-sustainability::after {
+		block-size: auto;
+		aspect-ratio: 4 / 3;
+		min-block-size: 0;
+		background-image: url("../img/villa-antares-sustainability-960.webp");
 	}
 }
 
@@ -2413,9 +2564,11 @@ html.villa-antares-menu-open body {
 	border: 0;
 }
 
-@media (max-width: 47.999rem) {
+@media (max-width: 63.999rem) {
 	.entry-content > .villa-antares-gallery,
 	.entry-content.is-layout-constrained > .villa-antares-gallery,
+	.entry-content > .villa-antares-sustainability,
+	.entry-content.is-layout-constrained > .villa-antares-sustainability,
 	.entry-content > .villa-antares-map,
 	.entry-content.is-layout-constrained > .villa-antares-map {
 		inline-size: 100vw;
@@ -2425,17 +2578,13 @@ html.villa-antares-menu-open body {
 
 	.entry-content > .villa-antares-map,
 	.entry-content.is-layout-constrained > .villa-antares-map {
+		block-size: 100vh;
 		block-size: 100svh;
 		aspect-ratio: auto;
 	}
 }
 
 @media (min-width: 37.5rem) {
-	.villa-antares-map {
-		block-size: auto;
-		aspect-ratio: 3 / 2;
-	}
-
 	.villa-antares-location__distances {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
@@ -2505,7 +2654,7 @@ html.villa-antares-menu-open body {
  * └── .villa-antares-contact__panel
  *
  * Background image:
- * assets/img/DJI_0959.jpg
+ * assets/img/villa-antares-contact.webp
  */
 
 .villa-antares-contact {
@@ -2515,8 +2664,8 @@ html.villa-antares-menu-open body {
 	align-items: center;
 	inline-size: 100%;
 	max-inline-size: none;
-	min-block-size: min(56rem, 100svh);
-	padding-block: clamp(4rem, 14vw, 7rem);
+	min-block-size: min(48rem, 100svh);
+	padding-block: clamp(3rem, 10vw, 5.5rem);
 	padding-inline:
 		max(
 			var(--villa-antares-gutter, 1.25rem),
@@ -2530,7 +2679,11 @@ html.villa-antares-menu-open body {
 	overflow: hidden;
 	color: var(--wp--preset--color--surface, #fffdf8);
 	background-color: var(--wp--preset--color--text, #121212);
-	background-image: url("../img/villa-antares-contact.webp");
+	background-image: url("../img/villa-antares-contact-1920.webp");
+	background-image: image-set(
+		url("../img/villa-antares-contact-1920.webp") 1x,
+		url("../img/villa-antares-contact.webp") 2x
+	);
 	background-repeat: no-repeat;
 	background-position: 42% center;
 	background-size: cover;
@@ -2552,9 +2705,9 @@ html.villa-antares-menu-open body {
 	inset: 0;
 	background: linear-gradient(
 		180deg,
-		rgb(12 12 12 / 40%) 0%,
-		rgb(12 12 12 / 58%) 42%,
-		rgb(12 12 12 / 78%) 100%
+		rgb(12 12 12 / 22%) 0%,
+		rgb(12 12 12 / 34%) 42%,
+		rgb(12 12 12 / 48%) 100%
 	);
 	content: "";
 	pointer-events: none;
@@ -2565,15 +2718,15 @@ html.villa-antares-menu-open body {
  */
 .villa-antares-contact__panel {
 	inline-size: 100%;
-	max-inline-size: 30rem;
-	padding: clamp(1.5rem, 2.5vw, 2.25rem);
+	max-inline-size: 22rem;
+	padding: clamp(1.1rem, 2vw, 1.5rem);
 	margin: 0;
 	color: var(--wp--preset--color--surface, #fffdf8);
-	background-color: rgb(18 18 18 / 88%);
-	border-block-start: 1px solid rgb(255 253 248 / 34%);
-	border-block-end: 1px solid rgb(255 253 248 / 34%);
-	backdrop-filter: blur(3px);
-	-webkit-backdrop-filter: blur(3px);
+	background-color: rgb(18 18 18 / 42%);
+	border-block-start: 1px solid rgb(255 253 248 / 28%);
+	border-block-end: 1px solid rgb(255 253 248 / 28%);
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
 }
 
 /**
@@ -2582,10 +2735,10 @@ html.villa-antares-menu-open body {
 .villa-antares-contact__panel h2 {
 	max-inline-size: 11ch;
 	margin-block-start: 0;
-	margin-block-end: clamp(1.5rem, 4vw, 2.5rem);
+	margin-block-end: clamp(1rem, 3vw, 1.5rem);
 	color: var(--wp--preset--color--surface, #fffdf8);
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: clamp(2.5rem, 9vw, 5.5rem);
+	font-size: clamp(2rem, 7vw, 3.75rem);
 	font-weight: 400;
 	letter-spacing: -0.04em;
 	line-height: 0.95;
@@ -2595,8 +2748,8 @@ html.villa-antares-menu-open body {
 	max-inline-size: 38rem;
 	color: rgb(255 253 248 / 78%);
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: clamp(0.95rem, 2vw, 1.05rem);
-	line-height: 1.65;
+	font-size: clamp(0.9rem, 1.8vw, 0.98rem);
+	line-height: 1.55;
 }
 
 /**
@@ -2611,7 +2764,7 @@ html.villa-antares-menu-open body {
 }
 
 .villa-antares-contact .ff-el-group {
-	margin-block-end: clamp(1.1rem, 2vw, 1.35rem);
+	margin-block-end: clamp(0.85rem, 1.6vw, 1.05rem);
 }
 
 .villa-antares-contact .ff-el-input--label {
@@ -2638,8 +2791,8 @@ html.villa-antares-menu-open body {
  */
 .villa-antares-contact .ff-el-form-control {
 	inline-size: 100%;
-	min-block-size: 3rem;
-	padding: 0.625rem 0 !important;
+	min-block-size: 2.5rem;
+	padding: 0.5rem 0 !important;
 	border: 0 !important;
 	border-block-end: 1px solid rgb(255 253 248 / 48%) !important;
 	border-radius: 0 !important;
@@ -2648,16 +2801,16 @@ html.villa-antares-menu-open body {
 	background: transparent !important;
 	box-shadow: none !important;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1rem;
-	line-height: 1.5;
+	font-size: 0.95rem;
+	line-height: 1.45;
 	transition:
 		border-color 180ms ease,
 		background-color 180ms ease;
 }
 
 .villa-antares-contact textarea.ff-el-form-control {
-	min-block-size: 8rem;
-	padding-block-start: 0.75rem !important;
+	min-block-size: 5.5rem;
+	padding-block-start: 0.6rem !important;
 	resize: vertical;
 }
 
@@ -2683,11 +2836,11 @@ html.villa-antares-menu-open body {
  */
 .villa-antares-contact .ff-btn-submit {
 	display: inline-flex !important;
-	min-inline-size: 10rem;
-	min-block-size: 2.75rem;
+	min-inline-size: 8.5rem;
+	min-block-size: 2.4rem;
 	align-items: center;
 	justify-content: center;
-	padding: 0.75rem 1.5rem !important;
+	padding: 0.6rem 1.25rem !important;
 	border:
 		1px solid
 		var(--wp--preset--color--accent, #c6a76b) !important;
@@ -2697,7 +2850,7 @@ html.villa-antares-menu-open body {
 		var(--wp--preset--color--accent, #c6a76b) !important;
 	box-shadow: none !important;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 0.75rem !important;
+	font-size: 0.7rem !important;
 	font-weight: 700 !important;
 	letter-spacing: 0.14em;
 	line-height: 1;
@@ -2745,11 +2898,11 @@ html.villa-antares-menu-open body {
 }
 
 .villa-antares-contact .ff-message-success {
-	padding: 1rem 1.25rem;
+	padding: 0.85rem 1rem;
 	border: 1px solid rgb(255 253 248 / 42%);
 	border-radius: 0;
 	color: var(--wp--preset--color--surface, #fffdf8);
-	background-color: rgb(18 18 18 / 76%);
+	background-color: rgb(18 18 18 / 48%);
 	box-shadow: none;
 }
 
@@ -2772,14 +2925,14 @@ html.villa-antares-menu-open body {
 	.villa-antares-contact::before {
 		background: linear-gradient(
 			90deg,
-			rgb(12 12 12 / 34%) 0%,
-			rgb(12 12 12 / 48%) 45%,
-			rgb(12 12 12 / 80%) 100%
+			rgb(12 12 12 / 12%) 0%,
+			rgb(12 12 12 / 22%) 45%,
+			rgb(12 12 12 / 42%) 100%
 		);
 	}
 
 	.villa-antares-contact__panel {
-		inline-size: min(58%, 30rem);
+		inline-size: min(48%, 22rem);
 		margin-inline-start: auto;
 	}
 }
@@ -2789,13 +2942,13 @@ html.villa-antares-menu-open body {
  */
 @media (min-width: 64rem) {
 	.villa-antares-contact {
-		min-block-size: min(62rem, 100svh);
+		min-block-size: min(52rem, 100svh);
 		padding-inline: clamp(3rem, 7vw, 8rem);
-		background-position: center;
+		background-position: 42% center;
 	}
 
 	.villa-antares-contact__panel {
-		inline-size: min(100%, 30rem);
+		inline-size: min(100%, 22rem);
 	}
 }
 

@@ -234,7 +234,7 @@
 						'p',
 						null,
 						__(
-							'The editor displays poster previews only. Frontend playback always starts muted.',
+							'The editor displays poster previews only. Frontend shows an Enter overlay, then plays the hero video with sound.',
 							'vila-antares'
 						)
 					)

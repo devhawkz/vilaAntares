@@ -11,6 +11,7 @@
 		typeof navigator.connection === 'object' &&
 		navigator.connection !== null &&
 		navigator.connection.saveData === true;
+	const enteredStorageKey = 'villa-antares-hero-entered';
 
 	const onMediaChange = (query, callback) => {
 		if (typeof query.addEventListener === 'function') {
@@ -41,6 +42,12 @@
 			const nextButton = hero.querySelector(
 				'[data-villa-antares-next]'
 			);
+			const enterOverlay = hero.querySelector(
+				'[data-villa-antares-enter]'
+			);
+			const enterButton = hero.querySelector(
+				'[data-villa-antares-enter-button]'
+			);
 
 			if (!video || !controls || !playButton || !soundButton) {
 				return;
@@ -51,7 +58,8 @@
 			let playRequest = 0;
 			let sourceRequest = 0;
 			let switchingSource = false;
-			let autoplayAttempted = false;
+			let preferSound = true;
+			let hasEntered = false;
 			const playLabel =
 				playButton.dataset.playLabel ||
 				playButton.getAttribute('aria-label') ||
@@ -178,6 +186,72 @@
 					});
 			};
 
+			const enableSound = () => {
+				if (video.volume === 0) {
+					video.volume = 1;
+				}
+
+				video.muted = false;
+				video.removeAttribute('muted');
+				preferSound = true;
+				updateControls();
+			};
+
+			const markEntered = () => {
+				hasEntered = true;
+				hero.classList.add('is-entered');
+				controls.hidden = false;
+
+				if (enterOverlay) {
+					enterOverlay.setAttribute('aria-hidden', 'true');
+					enterOverlay.setAttribute('inert', '');
+				}
+
+				try {
+					window.sessionStorage.setItem(
+						enteredStorageKey,
+						'1'
+					);
+				} catch (error) {
+					// Ignore storage failures (private mode, etc.).
+				}
+			};
+
+			const startWithSound = () => {
+				if (!ensureSource()) {
+					return Promise.resolve(false);
+				}
+
+				preferSound = true;
+				enableSound();
+
+				return requestPlayback(true).then((playedWithSound) => {
+					if (playedWithSound && !video.muted) {
+						hero.classList.remove('is-autoplay-blocked');
+						updateControls();
+						return true;
+					}
+
+					video.muted = true;
+					video.setAttribute('muted', '');
+					hero.classList.add('is-autoplay-blocked');
+
+					return requestPlayback(true).then((playedMuted) => {
+						updateControls();
+						return playedMuted;
+					});
+				});
+			};
+
+			const enterExperience = () => {
+				if (hasEntered) {
+					return;
+				}
+
+				markEntered();
+				startWithSound();
+			};
+
 			const switchResponsiveSource = () => {
 				const nextMedia = getMedia();
 
@@ -200,6 +274,7 @@
 				const savedTime = Number.isFinite(video.currentTime)
 					? video.currentTime
 					: 0;
+				const keepSound = preferSound && !video.muted;
 
 				switchingSource = true;
 				++playRequest;
@@ -229,8 +304,17 @@
 					switchingSource = false;
 					desiredPlaying = wasPlaying;
 
+					if (keepSound) {
+						enableSound();
+					}
+
 					if (wasPlaying) {
-						requestPlayback(true);
+						requestPlayback(true).then((played) => {
+							if (!played && keepSound) {
+								video.muted = true;
+								requestPlayback(true);
+							}
+						});
 					} else {
 						updateControls();
 					}
@@ -248,6 +332,10 @@
 			});
 
 			video.addEventListener('click', () => {
+				if (!hasEntered) {
+					return;
+				}
+
 				requestPlayback(!desiredPlaying);
 			});
 
@@ -255,6 +343,7 @@
 				const turnSoundOn = video.muted || video.volume === 0;
 
 				if (!turnSoundOn) {
+					preferSound = false;
 					video.muted = true;
 					updateControls();
 					return;
@@ -265,11 +354,8 @@
 					return;
 				}
 
-				if (video.volume === 0) {
-					video.volume = 1;
-				}
-
-				video.muted = false;
+				preferSound = true;
+				enableSound();
 
 				if (!video.paused) {
 					updateControls();
@@ -287,7 +373,11 @@
 			video.addEventListener('playing', () => {
 				desiredPlaying = true;
 				hero.classList.add('is-video-playing');
-				hero.classList.remove('is-autoplay-blocked');
+
+				if (!video.muted) {
+					hero.classList.remove('is-autoplay-blocked');
+				}
+
 				updateControls();
 			});
 
@@ -360,22 +450,53 @@
 				});
 			}
 
+			if (enterButton) {
+				enterButton.addEventListener('click', enterExperience);
+			}
+
+			if (enterOverlay) {
+				enterOverlay.addEventListener('keydown', (event) => {
+					if (event.key === 'Enter' || event.key === ' ') {
+						event.preventDefault();
+						enterExperience();
+					}
+				});
+			}
+
 			setPoster();
-			video.muted = true;
-			controls.hidden = false;
 			updateControls();
 
 			if (reducedMotionQuery.matches || saveData) {
 				hero.classList.add('requires-manual-playback');
 				video.preload = 'none';
 				video.removeAttribute('src');
+				markEntered();
 				return;
 			}
 
-			if (!autoplayAttempted) {
-				autoplayAttempted = true;
-				ensureSource();
-				requestPlayback(true);
+			let alreadyEntered = false;
+
+			try {
+				alreadyEntered =
+					window.sessionStorage.getItem(enteredStorageKey) ===
+					'1';
+			} catch (error) {
+				alreadyEntered = false;
 			}
+
+			if (alreadyEntered || !enterOverlay || !enterButton) {
+				markEntered();
+				startWithSound();
+				return;
+			}
+
+			controls.hidden = true;
+			ensureSource();
+
+			window.setTimeout(() => {
+				if (!hasEntered && enterButton) {
+					enterButton.focus();
+				}
+			}, 0);
 		});
 })();

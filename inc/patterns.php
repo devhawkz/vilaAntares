@@ -24,8 +24,8 @@ function villa_antares_get_about_pattern_content() {
 <div class="wp-block-group villa-antares-about__rows">
 
 <!-- wp:group {"className":"villa-antares-about__row villa-antares-about__row--image-first","layout":{"type":"default"}} -->
-<div class="wp-block-group villa-antares-about__row villa-antares-about__row--image-first"><!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"villa-antares-about__media"} -->
-<figure class="wp-block-image size-large villa-antares-about__media"></figure>
+<div class="wp-block-group villa-antares-about__row villa-antares-about__row--image-first"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"villa-antares-about__media"} -->
+<figure class="wp-block-image size-full villa-antares-about__media"></figure>
 <!-- /wp:image -->
 
 <!-- wp:group {"className":"villa-antares-about__card","layout":{"type":"constrained"}} -->
@@ -54,14 +54,14 @@ function villa_antares_get_about_pattern_content() {
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"villa-antares-about__media"} -->
-<figure class="wp-block-image size-large villa-antares-about__media"></figure>
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"villa-antares-about__media"} -->
+<figure class="wp-block-image size-full villa-antares-about__media"></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"villa-antares-about__row villa-antares-about__row--image-first","layout":{"type":"default"}} -->
-<div class="wp-block-group villa-antares-about__row villa-antares-about__row--image-first"><!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"villa-antares-about__media"} -->
-<figure class="wp-block-image size-large villa-antares-about__media"></figure>
+<div class="wp-block-group villa-antares-about__row villa-antares-about__row--image-first"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"villa-antares-about__media"} -->
+<figure class="wp-block-image size-full villa-antares-about__media"></figure>
 <!-- /wp:image -->
 
 <!-- wp:group {"className":"villa-antares-about__card","layout":{"type":"constrained"}} -->
@@ -86,14 +86,14 @@ function villa_antares_get_about_pattern_content() {
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"villa-antares-about__media"} -->
-<figure class="wp-block-image size-large villa-antares-about__media"></figure>
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"villa-antares-about__media"} -->
+<figure class="wp-block-image size-full villa-antares-about__media"></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"villa-antares-about__row villa-antares-about__row--image-first","layout":{"type":"default"}} -->
-<div class="wp-block-group villa-antares-about__row villa-antares-about__row--image-first"><!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"villa-antares-about__media"} -->
-<figure class="wp-block-image size-large villa-antares-about__media"></figure>
+<div class="wp-block-group villa-antares-about__row villa-antares-about__row--image-first"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"villa-antares-about__media"} -->
+<figure class="wp-block-image size-full villa-antares-about__media"></figure>
 <!-- /wp:image -->
 
 <!-- wp:group {"className":"villa-antares-about__card","layout":{"type":"constrained"}} -->
@@ -114,14 +114,14 @@ function villa_antares_get_about_pattern_content() {
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"villa-antares-about__media"} -->
-<figure class="wp-block-image size-large villa-antares-about__media"></figure>
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"villa-antares-about__media"} -->
+<figure class="wp-block-image size-full villa-antares-about__media"></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"villa-antares-about__row villa-antares-about__row--image-first","layout":{"type":"default"}} -->
-<div class="wp-block-group villa-antares-about__row villa-antares-about__row--image-first"><!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"villa-antares-about__media"} -->
-<figure class="wp-block-image size-large villa-antares-about__media"></figure>
+<div class="wp-block-group villa-antares-about__row villa-antares-about__row--image-first"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"villa-antares-about__media"} -->
+<figure class="wp-block-image size-full villa-antares-about__media"></figure>
 <!-- /wp:image -->
 
 <!-- wp:group {"className":"villa-antares-about__card","layout":{"type":"constrained"}} -->
@@ -150,8 +150,8 @@ function villa_antares_get_about_pattern_content() {
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:image {"sizeSlug":"large","linkDestination":"none","className":"villa-antares-about__media"} -->
-<figure class="wp-block-image size-large villa-antares-about__media"></figure>
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"villa-antares-about__media"} -->
+<figure class="wp-block-image size-full villa-antares-about__media"></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group -->
 
@@ -177,10 +177,6 @@ function villa_antares_get_sustainability_pattern_content() {
 <!-- wp:heading {"level":2,"className":"villa-antares-sustainability__title"} -->
 <h2 class="wp-block-heading villa-antares-sustainability__title">Sustainable Luxury</h2>
 <!-- /wp:heading -->
-
-<!-- wp:paragraph {"className":"villa-antares-sustainability__intro"} -->
-<p class="villa-antares-sustainability__intro">Villa Antares is the ideal choice for those who enjoy nature hiking tours, magnificent landscapes and panoramic sea views overlooking Sveti Stefan, Miločer and Budva riviera. It is located near Čelobrdo hill (cca 700m above sea level).</p>
-<!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"villa-antares-sustainability__intro"} -->
 <p class="villa-antares-sustainability__intro">Beyond its beauty, Villa Antares offers exceptional self-sufficiency and modern infrastructure:</p>
@@ -255,6 +251,10 @@ function villa_antares_get_sustainability_pattern_content() {
 
 <!-- wp:paragraph {"className":"villa-antares-sustainability__outro"} -->
 <p class="villa-antares-sustainability__outro">This rare combination of sustainability and luxury ensures comfort, independence, and peace of mind throughout the year.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"villa-antares-sustainability__view"} -->
+<p class="villa-antares-sustainability__view">Villa Antares is the ideal choice for those who enjoy nature hiking tours, magnificent landscapes and panoramic sea views overlooking Sveti Stefan, Miločer and Budva riviera. It is located near Čelobrdo hill (cca 700m above sea level).</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group --></section>
 <!-- /wp:group -->

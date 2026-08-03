@@ -87,7 +87,7 @@ $image_html = '';
 if ( $image_id ) {
 	$image_html = wp_get_attachment_image(
 		$image_id,
-		'full',
+		'1536x1536',
 		false,
 		array(
 			'alt'           => $alt_text,
@@ -99,6 +99,19 @@ if ( $image_id ) {
 		)
 	);
 }
+
+// Split off the first paragraph so mobile/tablet can place the image
+// directly beneath it while desktop keeps the original overlap layout.
+$content   = is_string( $content ) ? $content : '';
+$lead_html = '';
+$rest_html = $content;
+
+if ( preg_match( '/^\s*<p\b[^>]*>.*?<\/p>/is', $content, $lead_match ) ) {
+	$lead_html = $lead_match[0];
+	$rest_html = substr( $content, strlen( $lead_match[0] ) );
+}
+
+$rest_html = trim( $rest_html );
 
 $wrapper_attributes = get_block_wrapper_attributes(
 	array(
@@ -112,7 +125,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	aria-labelledby="villa-antares-introduction-title"
 >
 	<div class="villa-antares-introduction__layout">
-		<div class="villa-antares-introduction__text-card">
+		<div class="villa-antares-introduction__text-top">
 			
 			<div class="villa-antares-introduction__marker">
 				<span><?php echo esc_html( $section_number ); ?></span>
@@ -129,14 +142,11 @@ $wrapper_attributes = get_block_wrapper_attributes(
 				class="villa-antares-introduction__title"
 			><?php echo esc_html( $title ); ?></h2>
 
-			<div class="villa-antares-introduction__body">
-				<?php echo wp_kses_post( $content ); ?>
-			</div>
-
-			<a
-				class="villa-antares-introduction__cta"
-				href="<?php echo esc_url( $cta_url ); ?>"
-			><?php echo esc_html( $cta_text ); ?></a>
+			<?php if ( $lead_html ) : ?>
+				<div class="villa-antares-introduction__lead">
+					<?php echo wp_kses_post( $lead_html ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<?php if ( $image_html ) : ?>
@@ -147,6 +157,19 @@ $wrapper_attributes = get_block_wrapper_attributes(
 				<?php echo $image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Generated and escaped by wp_get_attachment_image(). ?>
 			</figure>
 		<?php endif; ?>
+
+		<div class="villa-antares-introduction__text-bottom">
+			<?php if ( $rest_html ) : ?>
+				<div class="villa-antares-introduction__body">
+					<?php echo wp_kses_post( $rest_html ); ?>
+				</div>
+			<?php endif; ?>
+
+			<a
+				class="villa-antares-introduction__cta"
+				href="<?php echo esc_url( $cta_url ); ?>"
+			><?php echo esc_html( $cta_text ); ?></a>
+		</div>
 	</div>
 
 	<div
